@@ -1,0 +1,99 @@
+package test
+
+import (
+	"fmt"
+	"strings"
+	"testing"
+
+	"github.com/gruntwork-io/terratest/modules/random"
+	"github.com/gruntwork-io/terratest/modules/terraform"
+	"github.com/stretchr/testify/assert"
+)
+
+// TestTerraformModuleBasicExample tests the basic example of the module
+func TestTerraformModuleBasicExample(t *testing.T) {
+	t.Parallel()
+
+	// Generate a random name to prevent a naming conflict
+	uniqueID := random.UniqueId()
+	resourceName := fmt.Sprintf("resource-test-%s", uniqueID)
+	resourceGroupName := fmt.Sprintf("rg-test-%s", uniqueID)
+
+	// Construct the terraform options with default retryable errors
+	terraformOptions := terraform.WithDefaultRetryableErrors(t, &terraform.Options{
+		// The path to where our Terraform code is located
+		TerraformDir: "../examples/basic",
+
+		// Variables to pass to our Terraform code using -var options
+		Vars: map[string]interface{}{
+			"name":                resourceName,
+			"resource_group_name": resourceGroupName,
+			// Add other variables as needed
+		},
+	})
+
+	// At the end of the test, run `terraform destroy` to clean up any resources that were created
+	defer terraform.Destroy(t, terraformOptions)
+
+	// Run `terraform init` and `terraform apply`. Fail the test if there are any errors.
+	terraform.InitAndApply(t, terraformOptions)
+
+	// Run `terraform output` to get the values of output variables
+	resourceID := terraform.Output(t, terraformOptions, "resource_id")
+
+	// Verify that the resource ID is not empty
+	assert.NotEmpty(t, resourceID, "Resource ID should not be empty")
+
+	// Verify that the resource ID contains the correct resource group name
+	assert.True(t, strings.Contains(resourceID, resourceGroupName), "Resource ID should contain the resource group name")
+
+	// Verify that the resource ID contains the correct resource name
+	assert.True(t, strings.Contains(resourceID, resourceName), "Resource ID should contain the resource name")
+
+	// Add more assertions as needed to verify the resource properties
+}
+
+// TestTerraformModuleCompleteExample tests the complete example of the module
+func TestTerraformModuleCompleteExample(t *testing.T) {
+	t.Parallel()
+
+	// Generate a random name to prevent a naming conflict
+	uniqueID := random.UniqueId()
+	resourceName := fmt.Sprintf("resource-test-%s", uniqueID)
+	resourceGroupName := fmt.Sprintf("rg-test-%s", uniqueID)
+
+	// Construct the terraform options with default retryable errors
+	terraformOptions := terraform.WithDefaultRetryableErrors(t, &terraform.Options{
+		// The path to where our Terraform code is located
+		TerraformDir: "../examples/complete",
+
+		// Variables to pass to our Terraform code using -var options
+		Vars: map[string]interface{}{
+			"name":                resourceName,
+			"resource_group_name": resourceGroupName,
+			// Add other variables as needed
+		},
+	})
+
+	// At the end of the test, run `terraform destroy` to clean up any resources that were created
+	defer terraform.Destroy(t, terraformOptions)
+
+	// Run `terraform init` and `terraform apply`. Fail the test if there are any errors.
+	terraform.InitAndApply(t, terraformOptions)
+
+	// Run `terraform output` to get the values of output variables
+	resourceID := terraform.Output(t, terraformOptions, "resource_id")
+
+	// Verify that the resource ID is not empty
+	assert.NotEmpty(t, resourceID, "Resource ID should not be empty")
+
+	// Verify that the resource ID contains the correct resource group name
+	assert.True(t, strings.Contains(resourceID, resourceGroupName), "Resource ID should contain the resource group name")
+
+	// Verify that the resource ID contains the correct resource name
+	assert.True(t, strings.Contains(resourceID, resourceName), "Resource ID should contain the resource name")
+
+	// Add more assertions as needed to verify the resource properties
+}
+
+// Add more test functions for other examples or specific features

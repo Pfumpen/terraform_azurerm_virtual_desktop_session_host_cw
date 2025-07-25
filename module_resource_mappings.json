@@ -1,0 +1,2463 @@
+{
+  "AI & Machine Learning": {
+    "machine_learning_workspace": {
+      "core_resource_patterns": ["machine_learning_workspace.html.markdown"],
+      "associated_resource_patterns": [
+        "machine_learning_compute_cluster.html.markdown",
+        "machine_learning_compute_instance.html.markdown",
+        "machine_learning_datastore_blobstorage.html.markdown",
+        "machine_learning_datastore_datalake_gen2.html.markdown",
+        "machine_learning_datastore_fileshare.html.markdown",
+        "machine_learning_inference_cluster.html.markdown",
+        "machine_learning_synapse_spark.html.markdown",
+        "machine_learning_workspace_network_outbound_rule_fqdn.html.markdown",
+        "machine_learning_workspace_network_outbound_rule_private_endpoint.html.markdown",
+        "machine_learning_workspace_network_outbound_rule_service_tag.html.markdown",
+        "monitor_diagnostic_setting.html.markdown",
+        "private_endpoint.html.markdown",
+        "role_assignment.html.markdown"
+      ]
+    },
+    "cognitive_account": {
+      "core_resource_patterns": ["cognitive_account.html.markdown"],
+      "associated_resource_patterns": [
+        "cognitive_account_customer_managed_key.html.markdown",
+        "cognitive_account_rai_blocklist.html.markdown",
+        "cognitive_account_rai_policy.html.markdown",
+        "cognitive_deployment.html.markdown",
+        "monitor_diagnostic_setting.html.markdown",
+        "private_endpoint.html.markdown",
+        "role_assignment.html.markdown"
+      ]
+    },
+    "ai_foundry": {
+      "core_resource_patterns": ["ai_foundry.html.markdown"],
+      "associated_resource_patterns": [
+        "ai_foundry_project.html.markdown",
+        "monitor_diagnostic_setting.html.markdown",
+        "private_endpoint.html.markdown",
+        "role_assignment.html.markdown"
+      ]
+    },
+    "ai_services": {
+      "core_resource_patterns": ["ai_services.html.markdown"],
+      "associated_resource_patterns": [
+        "monitor_diagnostic_setting.html.markdown",
+        "private_endpoint.html.markdown",
+        "role_assignment.html.markdown"
+      ]
+    },
+    "form_recognizer": {
+      "core_resource_patterns": ["form_recognizer_account.html.markdown"],
+      "associated_resource_patterns": [
+        "monitor_diagnostic_setting.html.markdown",
+        "private_endpoint.html.markdown",
+        "role_assignment.html.markdown"
+      ]
+    },
+    "bot_service_azure_bot": {
+      "core_resource_patterns": ["bot_service_azure_bot.html.markdown"],
+      "associated_resource_patterns": [
+        "bot_channel_alexa.html.markdown",
+        "bot_channel_direct_line_speech.html.markdown",
+        "bot_channel_directline.html.markdown",
+        "bot_channel_email.html.markdown",
+        "bot_channel_facebook.html.markdown",
+        "bot_channel_line.html.markdown",
+        "bot_channel_ms_teams.html.markdown",
+        "bot_channel_slack.html.markdown",
+        "bot_channel_sms.html.markdown",
+        "bot_channel_web_chat.html.markdown",
+        "bot_connection.html.markdown",
+        "monitor_diagnostic_setting.html.markdown",
+        "private_endpoint.html.markdown",
+        "role_assignment.html.markdown"
+      ]
+    },
+    "bot_channels_registration": {
+      "core_resource_patterns": ["bot_channels_registration.html.markdown"],
+      "associated_resource_patterns": [
+        "bot_channel_alexa.html.markdown",
+        "bot_channel_direct_line_speech.html.markdown",
+        "bot_channel_directline.html.markdown",
+        "bot_channel_email.html.markdown",
+        "bot_channel_facebook.html.markdown",
+        "bot_channel_line.html.markdown",
+        "bot_channel_ms_teams.html.markdown",
+        "bot_channel_slack.html.markdown",
+        "bot_channel_sms.html.markdown",
+        "bot_channel_web_chat.html.markdown",
+        "bot_connection.html.markdown",
+        "monitor_diagnostic_setting.html.markdown",
+        "role_assignment.html.markdown"
+      ]
+    },
+    "bot_web_app": {
+      "core_resource_patterns": ["bot_web_app.html.markdown"],
+      "associated_resource_patterns": [
+        "monitor_diagnostic_setting.html.markdown",
+        "private_endpoint.html.markdown",
+        "role_assignment.html.markdown"
+      ]
+    },
+    "bot_healthbot": {
+      "core_resource_patterns": ["bot_healthbot.html.markdown"],
+      "associated_resource_patterns": [
+        "monitor_diagnostic_setting.html.markdown",
+        "role_assignment.html.markdown"
+      ]
+    },
+    "maps_account": {
+      "core_resource_patterns": ["maps_account.html.markdown"],
+      "associated_resource_patterns": [
+        "maps_creator.html.markdown",
+        "monitor_diagnostic_setting.html.markdown",
+        "private_endpoint.html.markdown",
+        "role_assignment.html.markdown"
+      ]
+    },
+    "search_service": {
+      "core_resource_patterns": ["search_service.html.markdown"],
+      "associated_resource_patterns": [
+        "monitor_diagnostic_setting.html.markdown",
+        "private_endpoint.html.markdown",
+        "role_assignment.html.markdown",
+        "search_shared_private_link_service.html.markdown"
+      ]
+    },
+    "video_indexer_account": {
+      "core_resource_patterns": ["video_indexer_account.html.markdown"],
+      "associated_resource_patterns": [
+        "monitor_diagnostic_setting.html.markdown",
+        "private_endpoint.html.markdown",
+        "role_assignment.html.markdown"
+      ]
+    }
+  },
+  "Analytics": {
+    "databricks_workspace": {
+      "core_resource_patterns": ["databricks_workspace.html.markdown"],
+      "associated_resource_patterns": [
+        "databricks_access_connector.html.markdown",
+        "databricks_virtual_network_peering.html.markdown",
+        "databricks_workspace_root_dbfs_customer_managed_key.html.markdown",
+        "monitor_diagnostic_setting.html.markdown",
+        "private_endpoint.html.markdown",
+        "role_assignment.html.markdown"
+      ]
+    },
+    "data_factory": {
+      "core_resource_patterns": ["data_factory.html.markdown"],
+      "associated_resource_patterns": [
+        "data_factory_credential_service_principal.html.markdown",
+        "data_factory_credential_user_assigned_managed_identity.html.markdown",
+        "data_factory_custom_dataset.html.markdown",
+        "data_factory_data_flow.html.markdown",
+        "data_factory_dataset_azure_blob.html.markdown",
+        "data_factory_dataset_azure_sql_table.html.markdown",
+        "data_factory_dataset_binary.html.markdown",
+        "data_factory_dataset_cosmosdb_sqlapi.html.markdown",
+        "data_factory_dataset_delimited_text.html.markdown",
+        "data_factory_dataset_http.html.markdown",
+        "data_factory_dataset_json.html.markdown",
+        "data_factory_dataset_mysql.html.markdown",
+        "data_factory_dataset_parquet.html.markdown",
+        "data_factory_dataset_postgresql.html.markdown",
+        "data_factory_dataset_snowflake.html.markdown",
+        "data_factory_dataset_sql_server_table.html.markdown",
+        "data_factory_flowlet_data_flow.html.markdown",
+        "data_factory_integration_runtime_azure.html.markdown",
+        "data_factory_integration_runtime_azure_ssis.html.markdown",
+        "data_factory_integration_runtime_self_hosted.html.markdown",
+        "data_factory_linked_custom_service.html.markdown",
+        "data_factory_linked_service_azure_blob_storage.html.markdown",
+        "data_factory_linked_service_azure_databricks.html.markdown",
+        "data_factory_linked_service_azure_file_storage.html.markdown",
+        "data_factory_linked_service_azure_function.html.markdown",
+        "data_factory_linked_service_azure_search.html.markdown",
+        "data_factory_linked_service_azure_sql_database.html.markdown",
+        "data_factory_linked_service_azure_table_storage.html.markdown",
+        "data_factory_linked_service_cosmosdb.html.markdown",
+        "data_factory_linked_service_cosmosdb_mongoapi.html.markdown",
+        "data_factory_linked_service_data_lake_storage_gen2.html.markdown",
+        "data_factory_linked_service_key_vault.html.markdown",
+        "data_factory_linked_service_kusto.html.markdown",
+        "data_factory_linked_service_mysql.html.markdown",
+        "data_factory_linked_service_odata.html.markdown",
+        "data_factory_linked_service_odbc.html.markdown",
+        "data_factory_linked_service_postgresql.html.markdown",
+        "data_factory_linked_service_sftp.html.markdown",
+        "data_factory_linked_service_snowflake.html.markdown",
+        "data_factory_linked_service_sql_server.html.markdown",
+        "data_factory_linked_service_synapse.html.markdown",
+        "data_factory_linked_service_web.html.markdown",
+        "data_factory_managed_private_endpoint.html.markdown",
+        "data_factory_pipeline.html.markdown",
+        "data_factory_trigger_blob_event.html.markdown",
+        "data_factory_trigger_custom_event.html.markdown",
+        "data_factory_trigger_schedule.html.markdown",
+        "data_factory_tumbling_window.html.markdown",
+        "monitor_diagnostic_setting.html.markdown",
+        "private_endpoint.html.markdown",
+        "role_assignment.html.markdown"
+      ]
+    },
+    "synapse_workspace": {
+      "core_resource_patterns": ["synapse_workspace.html.markdown"],
+      "associated_resource_patterns": [
+        "monitor_diagnostic_setting.html.markdown",
+        "private_endpoint.html.markdown",
+        "role_assignment.html.markdown",
+        "synapse_firewall_rule.html.markdown",
+        "synapse_integration_runtime_azure.html.markdown",
+        "synapse_integration_runtime_self_hosted.html.markdown",
+        "synapse_linked_service.html.markdown",
+        "synapse_managed_private_endpoint.html.markdown",
+        "synapse_private_link_hub.html.markdown",
+        "synapse_role_assignment.html.markdown",
+        "synapse_spark_pool.html.markdown",
+        "synapse_sql_pool.html.markdown",
+        "synapse_sql_pool_extended_auditing_policy.html.markdown",
+        "synapse_sql_pool_security_alert_policy.html.markdown",
+        "synapse_sql_pool_vulnerability_assessment.html.markdown",
+        "synapse_sql_pool_vulnerability_assessment_baseline.html.markdown",
+        "synapse_sql_pool_workload_classifier.html.markdown",
+        "synapse_sql_pool_workload_group.html.markdown",
+        "synapse_workspace_aad_admin.html.markdown",
+        "synapse_workspace_extended_auditing_policy.html.markdown",
+        "synapse_workspace_key.html.markdown",
+        "synapse_workspace_security_alert_policy.html.markdown",
+        "synapse_workspace_sql_aad_admin.html.markdown",
+        "synapse_workspace_vulnerability_assessment.html.markdown"
+      ]
+    },
+    "kusto_cluster": {
+      "core_resource_patterns": ["kusto_cluster.html.markdown"],
+      "associated_resource_patterns": [
+        "kusto_attached_database_configuration.html.markdown",
+        "kusto_cluster_customer_managed_key.html.markdown",
+        "kusto_cluster_managed_private_endpoint.html.markdown",
+        "kusto_cluster_principal_assignment.html.markdown",
+        "kusto_cosmosdb_data_connection.html.markdown",
+        "kusto_database.html.markdown",
+        "kusto_database_principal_assignment.html.markdown",
+        "kusto_eventgrid_data_connection.html.markdown",
+        "kusto_eventhub_data_connection.html.markdown",
+        "kusto_iothub_data_connection.html.markdown",
+        "kusto_script.html.markdown",
+        "monitor_diagnostic_setting.html.markdown",
+        "private_endpoint.html.markdown",
+        "role_assignment.html.markdown"
+      ]
+    },
+    "analysis_services_server": {
+      "core_resource_patterns": ["analysis_services_server.html.markdown"],
+      "associated_resource_patterns": [
+        "monitor_diagnostic_setting.html.markdown",
+        "private_endpoint.html.markdown",
+        "role_assignment.html.markdown"
+      ]
+    },
+    "stream_analytics_job": {
+      "core_resource_patterns": ["stream_analytics_job.html.markdown"],
+      "associated_resource_patterns": [
+        "monitor_diagnostic_setting.html.markdown",
+        "private_endpoint.html.markdown",
+        "role_assignment.html.markdown",
+        "stream_analytics_function_javascript_udf.html.markdown",
+        "stream_analytics_function_javascript_uda.html.markdown",
+        "stream_analytics_job_schedule.html.markdown",
+        "stream_analytics_job_storage_account.html.markdown",
+        "stream_analytics_managed_private_endpoint.html.markdown",
+        "stream_analytics_output_blob.html.markdown",
+        "stream_analytics_output_cosmosdb.html.markdown",
+        "stream_analytics_output_eventhub.html.markdown",
+        "stream_analytics_output_function.html.markdown",
+        "stream_analytics_output_mssql.html.markdown",
+        "stream_analytics_output_powerbi.html.markdown",
+        "stream_analytics_output_servicebus_queue.html.markdown",
+        "stream_analytics_output_servicebus_topic.html.markdown",
+        "stream_analytics_output_synapse.html.markdown",
+        "stream_analytics_output_table.html.markdown",
+        "stream_analytics_reference_input_blob.html.markdown",
+        "stream_analytics_reference_input_mssql.html.markdown",
+        "stream_analytics_stream_input_blob.html.markdown",
+        "stream_analytics_stream_input_eventhub.html.markdown",
+        "stream_analytics_stream_input_eventhub_v2.html.markdown",
+        "stream_analytics_stream_input_iothub.html.markdown"
+      ]
+    },
+    "log_analytics_workspace": {
+      "core_resource_patterns": ["log_analytics_workspace.html.markdown"],
+      "associated_resource_patterns": [
+        "log_analytics_cluster.html.markdown",
+        "log_analytics_cluster_customer_managed_key.html.markdown",
+        "log_analytics_data_export_rule.html.markdown",
+        "log_analytics_datasource_windows_event.html.markdown",
+        "log_analytics_datasource_windows_performance_counter.html.markdown",
+        "log_analytics_linked_service.html.markdown",
+        "log_analytics_linked_storage_account.html.markdown",
+        "log_analytics_query_pack.html.markdown",
+        "log_analytics_query_pack_query.html.markdown",
+        "log_analytics_saved_search.html.markdown",
+        "log_analytics_solution.html.markdown",
+        "log_analytics_storage_insights.html.markdown",
+        "log_analytics_workspace_table.html.markdown",
+        "monitor_data_collection_rule.html.markdown",
+        "monitor_diagnostic_setting.html.markdown",
+        "role_assignment.html.markdown",
+        "sentinel_log_analytics_workspace_onboarding.html.markdown"
+      ]
+    },
+    "data_share_account": {
+      "core_resource_patterns": ["data_share_account.html.markdown"],
+      "associated_resource_patterns": [
+        "data_share.html.markdown",
+        "data_share_dataset_blob_storage.html.markdown",
+        "data_share_dataset_data_lake_gen2.html.markdown",
+        "data_share_dataset_kusto_cluster.html.markdown",
+        "data_share_dataset_kusto_database.html.markdown",
+        "monitor_diagnostic_setting.html.markdown",
+        "role_assignment.html.markdown"
+      ]
+    },
+    "elastic_cloud_elasticsearch": {
+      "core_resource_patterns": ["elastic_cloud_elasticsearch.html.markdown"],
+      "associated_resource_patterns": [
+        "monitor_diagnostic_setting.html.markdown",
+        "role_assignment.html.markdown"
+      ]
+    },
+    "fabric_capacity": {
+      "core_resource_patterns": ["fabric_capacity.html.markdown"],
+      "associated_resource_patterns": [
+        "monitor_diagnostic_setting.html.markdown",
+        "role_assignment.html.markdown"
+      ]
+    },
+    "hdinsight_hadoop_cluster": {
+      "core_resource_patterns": ["hdinsight_hadoop_cluster.html.markdown"],
+      "associated_resource_patterns": [
+        "monitor_diagnostic_setting.html.markdown",
+        "private_endpoint.html.markdown",
+        "role_assignment.html.markdown"
+      ]
+    },
+    "hdinsight_hbase_cluster": {
+      "core_resource_patterns": ["hdinsight_hbase_cluster.html.markdown"],
+      "associated_resource_patterns": [
+        "monitor_diagnostic_setting.html.markdown",
+        "private_endpoint.html.markdown",
+        "role_assignment.html.markdown"
+      ]
+    },
+    "hdinsight_interactive_query_cluster": {
+      "core_resource_patterns": ["hdinsight_interactive_query_cluster.html.markdown"],
+      "associated_resource_patterns": [
+        "monitor_diagnostic_setting.html.markdown",
+        "private_endpoint.html.markdown",
+        "role_assignment.html.markdown"
+      ]
+    },
+    "hdinsight_kafka_cluster": {
+      "core_resource_patterns": ["hdinsight_kafka_cluster.html.markdown"],
+      "associated_resource_patterns": [
+        "monitor_diagnostic_setting.html.markdown",
+        "private_endpoint.html.markdown",
+        "role_assignment.html.markdown"
+      ]
+    },
+    "hdinsight_spark_cluster": {
+      "core_resource_patterns": ["hdinsight_spark_cluster.html.markdown"],
+      "associated_resource_patterns": [
+        "monitor_diagnostic_setting.html.markdown",
+        "private_endpoint.html.markdown",
+        "role_assignment.html.markdown"
+      ]
+    },
+    "powerbi_embedded": {
+      "core_resource_patterns": ["powerbi_embedded.html.markdown"],
+      "associated_resource_patterns": [
+        "monitor_diagnostic_setting.html.markdown",
+        "role_assignment.html.markdown"
+      ]
+    },
+    "purview_account": {
+      "core_resource_patterns": ["purview_account.html.markdown"],
+      "associated_resource_patterns": [
+        "monitor_diagnostic_setting.html.markdown",
+        "private_endpoint.html.markdown",
+        "role_assignment.html.markdown"
+      ]
+    },
+    "stream_analytics_cluster": {
+      "core_resource_patterns": ["stream_analytics_cluster.html.markdown"],
+      "associated_resource_patterns": [
+        "monitor_diagnostic_setting.html.markdown",
+        "private_endpoint.html.markdown",
+        "role_assignment.html.markdown"
+      ]
+    }
+  },
+  "AppServices": {
+    "app_service_plan": {
+      "core_resource_patterns": ["app_service_plan.html.markdown", "service_plan.html.markdown"],
+      "associated_resource_patterns": [
+        "monitor_diagnostic_setting.html.markdown",
+        "role_assignment.html.markdown"
+      ]
+    },
+    "app_service": {
+      "core_resource_patterns": ["app_service.html.markdown", "linux_web_app.html.markdown", "web_app.html.markdown", "windows_web_app.html.markdown"],
+      "associated_resource_patterns": [
+        "app_service_active_slot.html.markdown",
+        "app_service_certificate.html.markdown",
+        "app_service_certificate_binding.html.markdown",
+        "app_service_connection.html.markdown",
+        "app_service_custom_hostname_binding.html.markdown",
+        "app_service_hybrid_connection.html.markdown",
+        "app_service_managed_certificate.html.markdown",
+        "app_service_public_certificate.html.markdown",
+        "app_service_slot.html.markdown",
+        "app_service_slot_custom_hostname_binding.html.markdown",
+        "app_service_slot_virtual_network_swift_connection.html.markdown",
+        "app_service_source_control.html.markdown",
+        "app_service_source_control_slot.html.markdown",
+        "app_service_source_control_token.html.markdown",
+        "app_service_virtual_network_swift_connection.html.markdown",
+        "application_insights.html.markdown",
+        "linux_web_app_slot.html.markdown",
+        "monitor_diagnostic_setting.html.markdown",
+        "private_endpoint.html.markdown",
+        "role_assignment.html.markdown",
+        "web_app_active_slot.html.markdown",
+        "web_app_hybrid_connection.html.markdown",
+        "windows_web_app_slot.html.markdown"
+      ]
+    },
+    "function_app": {
+      "core_resource_patterns": ["function_app.html.markdown", "linux_function_app.html.markdown", "windows_function_app.html.markdown"],
+      "associated_resource_patterns": [
+        "app_service_plan.html.markdown",
+        "application_insights.html.markdown",
+        "function_app_active_slot.html.markdown",
+        "function_app_connection.html.markdown",
+        "function_app_flex_consumption.html.markdown",
+        "function_app_function.html.markdown",
+        "function_app_hybrid_connection.html.markdown",
+        "function_app_slot.html.markdown",
+        "linux_function_app_slot.html.markdown",
+        "monitor_diagnostic_setting.html.markdown",
+        "private_endpoint.html.markdown",
+        "role_assignment.html.markdown",
+        "storage_account.html.markdown",
+        "windows_function_app_slot.html.markdown"
+      ]
+    },
+    "static_web_app": {
+      "core_resource_patterns": ["static_site.html.markdown", "static_web_app.html.markdown"],
+      "associated_resource_patterns": [
+        "monitor_diagnostic_setting.html.markdown",
+        "role_assignment.html.markdown",
+        "static_site_custom_domain.html.markdown",
+        "static_web_app_custom_domain.html.markdown",
+        "static_web_app_function_app_registration.html.markdown"
+      ]
+    },
+    "app_service_environment": {
+      "core_resource_patterns": ["app_service_environment_v3.html.markdown"],
+      "associated_resource_patterns": [
+        "monitor_diagnostic_setting.html.markdown",
+        "private_endpoint.html.markdown",
+        "role_assignment.html.markdown"
+      ]
+    },
+    "fluid_relay_servers": {
+      "core_resource_patterns": ["fluid_relay_servers.html.markdown"],
+      "associated_resource_patterns": [
+        "monitor_diagnostic_setting.html.markdown",
+        "private_endpoint.html.markdown",
+        "role_assignment.html.markdown"
+      ]
+    },
+    "nginx_deployment": {
+      "core_resource_patterns": ["nginx_deployment.html.markdown"],
+      "associated_resource_patterns": [
+        "monitor_diagnostic_setting.html.markdown",
+        "nginx_api_key.html.markdown",
+        "nginx_certificate.html.markdown",
+        "nginx_configuration.html.markdown",
+        "private_endpoint.html.markdown",
+        "role_assignment.html.markdown"
+      ]
+    }
+  },
+  "Compute": {
+    "virtual_machine": {
+      "core_resource_patterns": ["linux_virtual_machine.html.markdown", "virtual_machine.html.markdown", "windows_virtual_machine.html.markdown"],
+      "associated_resource_patterns": [
+        "availability_set.html.markdown",
+        "linux_virtual_machine_extension.html.markdown",
+        "log_analytics_workspace.html.markdown",
+        "managed_disk.html.markdown",
+        "monitor_data_collection_rule.html.markdown",
+        "monitor_diagnostic_setting.html.markdown",
+        "network_interface.html.markdown",
+        "policy_virtual_machine_configuration_assignment.html.markdown",
+        "private_endpoint.html.markdown",
+        "public_ip.html.markdown",
+        "role_assignment.html.markdown",
+        "user_assigned_identity.html.markdown",
+        "virtual_machine_automanage_configuration_assignment.html.markdown",
+        "virtual_machine_data_disk_attachment.html.markdown",
+        "virtual_machine_extension.html.markdown",
+        "virtual_machine_gallery_application_assignment.html.markdown",
+        "virtual_machine_implicit_data_disk_from_source.html.markdown",
+        "virtual_machine_packet_capture.html.markdown",
+        "virtual_machine_restore_point.html.markdown",
+        "virtual_machine_restore_point_collection.html.markdown",
+        "virtual_machine_run_command.html.markdown",
+        "windows_virtual_machine_extension.html.markdown"
+      ]
+    },
+    "virtual_machine_scale_set": {
+      "core_resource_patterns": ["linux_virtual_machine_scale_set.html.markdown", "orchestrated_virtual_machine_scale_set.html.markdown", "virtual_machine_scale_set.html.markdown", "windows_virtual_machine_scale_set.html.markdown"],
+      "associated_resource_patterns": [
+        "lb.html.markdown",
+        "linux_virtual_machine_scale_set_extension.html.markdown",
+        "monitor_diagnostic_setting.html.markdown",
+        "public_ip.html.markdown",
+        "role_assignment.html.markdown",
+        "user_assigned_identity.html.markdown",
+        "virtual_machine_scale_set_extension.html.markdown",
+        "virtual_machine_scale_set_packet_capture.html.markdown",
+        "virtual_machine_scale_set_standby_pool.html.markdown",
+        "windows_virtual_machine_scale_set_extension.html.markdown"
+      ]
+    },
+    "availability_set": {
+      "core_resource_patterns": ["availability_set.html.markdown"],
+      "associated_resource_patterns": [
+        "proximity_placement_group.html.markdown",
+        "role_assignment.html.markdown"
+      ]
+    },
+    "image": {
+      "core_resource_patterns": ["gallery_application.html.markdown", "gallery_application_version.html.markdown", "image.html.markdown", "shared_image.html.markdown", "shared_image_gallery.html.markdown", "shared_image_version.html.markdown"],
+      "associated_resource_patterns": [
+        "role_assignment.html.markdown"
+      ]
+    },
+    "disk_encryption_set": {
+      "core_resource_patterns": ["disk_encryption_set.html.markdown"],
+      "associated_resource_patterns": [
+        "key_vault.html.markdown",
+        "role_assignment.html.markdown"
+      ]
+    },
+    "batch_account": {
+      "core_resource_patterns": ["batch_account.html.markdown"],
+      "associated_resource_patterns": [
+        "batch_application.html.markdown",
+        "batch_certificate.html.markdown",
+        "batch_job.html.markdown",
+        "batch_pool.html.markdown",
+        "monitor_diagnostic_setting.html.markdown",
+        "private_endpoint.html.markdown",
+        "role_assignment.html.markdown"
+      ]
+    },
+    "capacity_reservation_group": {
+      "core_resource_patterns": ["capacity_reservation_group.html.markdown"],
+      "associated_resource_patterns": [
+        "capacity_reservation.html.markdown",
+        "role_assignment.html.markdown"
+      ]
+    },
+    "dedicated_host_group": {
+      "core_resource_patterns": ["dedicated_host_group.html.markdown"],
+      "associated_resource_patterns": [
+        "dedicated_host.html.markdown",
+        "role_assignment.html.markdown"
+      ]
+    },
+    "ssh_public_key": {
+      "core_resource_patterns": ["ssh_public_key.html.markdown"],
+      "associated_resource_patterns": []
+    },
+    "disk_access": {
+      "core_resource_patterns": ["disk_access.html.markdown"],
+      "associated_resource_patterns": [
+        "monitor_diagnostic_setting.html.markdown",
+        "private_endpoint.html.markdown",
+        "role_assignment.html.markdown"
+      ]
+    },
+    "hpc_cache": {
+      "core_resource_patterns": ["hpc_cache.html.markdown"],
+      "associated_resource_patterns": [
+        "hpc_cache_access_policy.html.markdown",
+        "hpc_cache_blob_nfs_target.html.markdown",
+        "hpc_cache_blob_target.html.markdown",
+        "hpc_cache_nfs_target.html.markdown",
+        "monitor_diagnostic_setting.html.markdown",
+        "role_assignment.html.markdown"
+      ]
+    },
+    "mssql_virtual_machine": {
+      "core_resource_patterns": ["mssql_virtual_machine.html.markdown"],
+      "associated_resource_patterns": [
+        "mssql_virtual_machine_availability_group_listener.html.markdown",
+        "mssql_virtual_machine_group.html.markdown",
+        "monitor_diagnostic_setting.html.markdown",
+        "role_assignment.html.markdown"
+      ]
+    },
+    "virtual_desktop_workspace": {
+      "core_resource_patterns": ["virtual_desktop_workspace.html.markdown"],
+      "associated_resource_patterns": [
+        "monitor_diagnostic_setting.html.markdown",
+        "private_endpoint.html.markdown",
+        "role_assignment.html.markdown",
+        "virtual_desktop_application_group.html.markdown",
+        "virtual_desktop_host_pool.html.markdown",
+        "virtual_desktop_scaling_plan.html.markdown",
+        "virtual_desktop_workspace_application_group_association.html.markdown"
+      ]
+    },
+    "virtual_desktop_host_pool": {
+      "core_resource_patterns": ["virtual_desktop_host_pool.html.markdown"],
+      "associated_resource_patterns": [
+        "monitor_diagnostic_setting.html.markdown",
+        "private_endpoint.html.markdown",
+        "role_assignment.html.markdown",
+        "virtual_desktop_application.html.markdown",
+        "virtual_desktop_application_group.html.markdown",
+        "virtual_desktop_host_pool_registration_info.html.markdown",
+        "virtual_desktop_scaling_plan_host_pool_association.html.markdown"
+      ]
+    },
+    "virtual_desktop_application_group": {
+      "core_resource_patterns": ["virtual_desktop_application_group.html.markdown"],
+      "associated_resource_patterns": [
+        "monitor_diagnostic_setting.html.markdown",
+        "role_assignment.html.markdown",
+        "virtual_desktop_application.html.markdown",
+        "virtual_desktop_workspace_application_group_association.html.markdown"
+      ]
+    },
+    "virtual_desktop_scaling_plan": {
+      "core_resource_patterns": ["virtual_desktop_scaling_plan.html.markdown"],
+      "associated_resource_patterns": [
+        "monitor_diagnostic_setting.html.markdown",
+        "role_assignment.html.markdown",
+        "virtual_desktop_scaling_plan_host_pool_association.html.markdown"
+      ]
+    }
+  },
+  "Containers": {
+    "kubernetes_cluster": {
+      "core_resource_patterns": ["kubernetes_cluster.html.markdown"],
+      "associated_resource_patterns": [
+        "container_registry.html.markdown",
+        "kubernetes_cluster_extension.html.markdown",
+        "kubernetes_cluster_node_pool.html.markdown",
+        "kubernetes_cluster_trusted_access_role_binding.html.markdown",
+        "kubernetes_flux_configuration.html.markdown",
+        "log_analytics_workspace.html.markdown",
+        "monitor_diagnostic_setting.html.markdown",
+        "private_endpoint.html.markdown",
+        "public_ip.html.markdown",
+        "role_assignment.html.markdown",
+        "subnet.html.markdown",
+        "user_assigned_identity.html.markdown",
+        "virtual_network.html.markdown"
+      ]
+    },
+    "container_registry": {
+      "core_resource_patterns": ["container_registry.html.markdown"],
+      "associated_resource_patterns": [
+        "container_connected_registry.html.markdown",
+        "container_registry_agent_pool.html.markdown",
+        "container_registry_cache_rule.html.markdown",
+        "container_registry_credential_set.html.markdown",
+        "container_registry_scope_map.html.markdown",
+        "container_registry_task.html.markdown",
+        "container_registry_task_schedule_run_now.html.markdown",
+        "container_registry_token.html.markdown",
+        "container_registry_token_password.html.markdown",
+        "container_registry_webhook.html.markdown",
+        "monitor_diagnostic_setting.html.markdown",
+        "private_endpoint.html.markdown",
+        "role_assignment.html.markdown"
+      ]
+    },
+    "container_app_environment": {
+      "core_resource_patterns": ["container_app_environment.html.markdown"],
+      "associated_resource_patterns": [
+        "container_app.html.markdown",
+        "container_app_custom_domain.html.markdown",
+        "container_app_environment_certificate.html.markdown",
+        "container_app_environment_custom_domain.html.markdown",
+        "container_app_environment_dapr_component.html.markdown",
+        "container_app_environment_storage.html.markdown",
+        "container_app_job.html.markdown",
+        "log_analytics_workspace.html.markdown",
+        "monitor_diagnostic_setting.html.markdown",
+        "private_endpoint.html.markdown",
+        "role_assignment.html.markdown",
+        "subnet.html.markdown",
+        "virtual_network.html.markdown"
+      ]
+    },
+    "container_instance": {
+      "core_resource_patterns": ["container_group.html.markdown"],
+      "associated_resource_patterns": [
+        "log_analytics_workspace.html.markdown",
+        "monitor_diagnostic_setting.html.markdown",
+        "private_endpoint.html.markdown",
+        "role_assignment.html.markdown",
+        "subnet.html.markdown",
+        "virtual_network.html.markdown"
+      ]
+    },
+    "service_fabric_cluster": {
+      "core_resource_patterns": ["service_fabric_cluster.html.markdown"],
+      "associated_resource_patterns": [
+        "monitor_diagnostic_setting.html.markdown",
+        "private_endpoint.html.markdown",
+        "role_assignment.html.markdown"
+      ]
+    },
+    "kubernetes_fleet_manager": {
+      "core_resource_patterns": ["kubernetes_fleet_manager.html.markdown"],
+      "associated_resource_patterns": [
+        "kubernetes_fleet_member.html.markdown",
+        "kubernetes_fleet_update_run.html.markdown",
+        "kubernetes_fleet_update_strategy.html.markdown",
+        "monitor_diagnostic_setting.html.markdown",
+        "private_endpoint.html.markdown",
+        "role_assignment.html.markdown"
+      ]
+    },
+    "redhat_openshift_cluster": {
+      "core_resource_patterns": ["redhat_openshift_cluster.html.markdown"],
+      "associated_resource_patterns": [
+        "monitor_diagnostic_setting.html.markdown",
+        "private_endpoint.html.markdown",
+        "role_assignment.html.markdown"
+      ]
+    },
+    "service_fabric_managed_cluster": {
+      "core_resource_patterns": ["service_fabric_managed_cluster.html.markdown"],
+      "associated_resource_patterns": [
+        "monitor_diagnostic_setting.html.markdown",
+        "private_endpoint.html.markdown",
+        "role_assignment.html.markdown"
+      ]
+    }
+  },
+  "Database": {
+    "sql_server": {
+      "core_resource_patterns": ["mssql_server.html.markdown"],
+      "associated_resource_patterns": [
+        "advanced_threat_protection.html.markdown",
+        "monitor_diagnostic_setting.html.markdown",
+        "mssql_database.html.markdown",
+        "mssql_database_extended_auditing_policy.html.markdown",
+        "mssql_database_vulnerability_assessment_rule_baseline.html.markdown",
+        "mssql_elasticpool.html.markdown",
+        "mssql_failover_group.html.markdown",
+        "mssql_firewall_rule.html.markdown",
+        "mssql_outbound_firewall_rule.html.markdown",
+        "mssql_server_dns_alias.html.markdown",
+        "mssql_server_extended_auditing_policy.html.markdown",
+        "mssql_server_microsoft_support_auditing_policy.html.markdown",
+        "mssql_server_security_alert_policy.html.markdown",
+        "mssql_server_transparent_data_encryption.html.markdown",
+        "mssql_server_vulnerability_assessment.html.markdown",
+        "mssql_virtual_network_rule.html.markdown",
+        "private_endpoint.html.markdown",
+        "role_assignment.html.markdown"
+      ]
+    },
+    "sql_managed_instance": {
+      "core_resource_patterns": ["mssql_managed_instance.html.markdown"],
+      "associated_resource_patterns": [
+        "advanced_threat_protection.html.markdown",
+        "monitor_diagnostic_setting.html.markdown",
+        "mssql_managed_database.html.markdown",
+        "mssql_managed_instance_active_directory_administrator.html.markdown",
+        "mssql_managed_instance_failover_group.html.markdown",
+        "mssql_managed_instance_security_alert_policy.html.markdown",
+        "mssql_managed_instance_transparent_data_encryption.html.markdown",
+        "mssql_managed_instance_vulnerability_assessment.html.markdown",
+        "private_endpoint.html.markdown",
+        "role_assignment.html.markdown"
+      ]
+    },
+    "mysql_flexible_server": {
+      "core_resource_patterns": ["mysql_flexible_server.html.markdown"],
+      "associated_resource_patterns": [
+        "monitor_diagnostic_setting.html.markdown",
+        "mysql_flexible_database.html.markdown",
+        "mysql_flexible_server_active_directory_administrator.html.markdown",
+        "mysql_flexible_server_configuration.html.markdown",
+        "mysql_flexible_server_firewall_rule.html.markdown",
+        "private_endpoint.html.markdown",
+        "role_assignment.html.markdown"
+      ]
+    },
+    "postgresql_flexible_server": {
+      "core_resource_patterns": ["postgresql_flexible_server.html.markdown"],
+      "associated_resource_patterns": [
+        "monitor_diagnostic_setting.html.markdown",
+        "postgresql_flexible_server_active_directory_administrator.html.markdown",
+        "postgresql_flexible_server_configuration.html.markdown",
+        "postgresql_flexible_server_database.html.markdown",
+        "postgresql_flexible_server_firewall_rule.html.markdown",
+        "postgresql_flexible_server_virtual_endpoint.html.markdown",
+        "private_endpoint.html.markdown",
+        "role_assignment.html.markdown"
+      ]
+    },
+    "cosmosdb_account": {
+      "core_resource_patterns": ["cosmosdb_account.html.markdown"],
+      "associated_resource_patterns": [
+        "cosmosdb_cassandra_keyspace.html.markdown",
+        "cosmosdb_cassandra_table.html.markdown",
+        "cosmosdb_gremlin_database.html.markdown",
+        "cosmosdb_gremlin_graph.html.markdown",
+        "cosmosdb_mongo_collection.html.markdown",
+        "cosmosdb_mongo_database.html.markdown",
+        "cosmosdb_mongo_role_definition.html.markdown",
+        "cosmosdb_mongo_user_definition.html.markdown",
+        "cosmosdb_sql_container.html.markdown",
+        "cosmosdb_sql_database.html.markdown",
+        "cosmosdb_sql_dedicated_gateway.html.markdown",
+        "cosmosdb_sql_function.html.markdown",
+        "cosmosdb_sql_role_assignment.html.markdown",
+        "cosmosdb_sql_role_definition.html.markdown",
+        "cosmosdb_sql_stored_procedure.html.markdown",
+        "cosmosdb_sql_trigger.html.markdown",
+        "cosmosdb_table.html.markdown",
+        "monitor_diagnostic_setting.html.markdown",
+        "private_endpoint.html.markdown",
+        "role_assignment.html.markdown"
+      ]
+    },
+    "cosmosdb_cassandra_cluster": {
+      "core_resource_patterns": ["cosmosdb_cassandra_cluster.html.markdown"],
+      "associated_resource_patterns": [
+        "cosmosdb_cassandra_datacenter.html.markdown",
+        "monitor_diagnostic_setting.html.markdown",
+        "private_endpoint.html.markdown",
+        "role_assignment.html.markdown"
+      ]
+    },
+    "redis_cache": {
+      "core_resource_patterns": ["redis_cache.html.markdown", "redis_enterprise_cluster.html.markdown"],
+      "associated_resource_patterns": [
+        "monitor_diagnostic_setting.html.markdown",
+        "private_endpoint.html.markdown",
+        "redis_cache_access_policy.html.markdown",
+        "redis_cache_access_policy_assignment.html.markdown",
+        "redis_enterprise_database.html.markdown",
+        "redis_firewall_rule.html.markdown",
+        "redis_linked_server.html.markdown",
+        "role_assignment.html.markdown"
+      ]
+    },
+    "database_migration_service": {
+      "core_resource_patterns": ["database_migration_service.html.markdown"],
+      "associated_resource_patterns": [
+        "database_migration_project.html.markdown",
+        "monitor_diagnostic_setting.html.markdown",
+        "private_endpoint.html.markdown",
+        "role_assignment.html.markdown"
+      ]
+    },
+    "confidential_ledger": {
+      "core_resource_patterns": ["confidential_ledger.html.markdown"],
+      "associated_resource_patterns": [
+        "monitor_diagnostic_setting.html.markdown",
+        "private_endpoint.html.markdown",
+        "role_assignment.html.markdown"
+      ]
+    },
+    "cosmosdb_postgresql_cluster": {
+      "core_resource_patterns": ["cosmosdb_postgresql_cluster.html.markdown"],
+      "associated_resource_patterns": [
+        "cosmosdb_postgresql_coordinator_configuration.html.markdown",
+        "cosmosdb_postgresql_firewall_rule.html.markdown",
+        "cosmosdb_postgresql_node_configuration.html.markdown",
+        "cosmosdb_postgresql_role.html.markdown",
+        "monitor_diagnostic_setting.html.markdown",
+        "role_assignment.html.markdown"
+      ]
+    },
+    "mongo_cluster": {
+      "core_resource_patterns": ["mongo_cluster.html.markdown"],
+      "associated_resource_patterns": [
+        "monitor_diagnostic_setting.html.markdown",
+        "private_endpoint.html.markdown",
+        "role_assignment.html.markdown"
+      ]
+    },
+    "mssql_job_agent": {
+      "core_resource_patterns": ["mssql_job_agent.html.markdown"],
+      "associated_resource_patterns": [
+        "mssql_job.html.markdown",
+        "mssql_job_credential.html.markdown",
+        "mssql_job_schedule.html.markdown",
+        "mssql_job_step.html.markdown",
+        "mssql_job_target_group.html.markdown",
+        "role_assignment.html.markdown"
+      ]
+    },
+    "oracle_autonomous_database": {
+      "core_resource_patterns": ["oracle_autonomous_database.html.markdown"],
+      "associated_resource_patterns": [
+        "monitor_diagnostic_setting.html.markdown",
+        "private_endpoint.html.markdown",
+        "role_assignment.html.markdown"
+      ]
+    },
+    "oracle_cloud_vm_cluster": {
+      "core_resource_patterns": ["oracle_cloud_vm_cluster.html.markdown"],
+      "associated_resource_patterns": [
+        "monitor_diagnostic_setting.html.markdown",
+        "role_assignment.html.markdown"
+      ]
+    },
+    "oracle_exadata_infrastructure": {
+      "core_resource_patterns": ["oracle_exadata_infrastructure.html.markdown"],
+      "associated_resource_patterns": [
+        "monitor_diagnostic_setting.html.markdown",
+        "role_assignment.html.markdown"
+      ]
+    },
+    "postgresql_server": {
+      "core_resource_patterns": ["postgresql_server.html.markdown"],
+      "associated_resource_patterns": [
+        "monitor_diagnostic_setting.html.markdown",
+        "postgresql_active_directory_administrator.html.markdown",
+        "postgresql_configuration.html.markdown",
+        "postgresql_database.html.markdown",
+        "postgresql_firewall_rule.html.markdown",
+        "postgresql_server_key.html.markdown",
+        "postgresql_virtual_network_rule.html.markdown",
+        "private_endpoint.html.markdown",
+        "role_assignment.html.markdown"
+      ]
+    }
+  },
+  "Developer Tools": {
+    "app_configuration_store": {
+      "core_resource_patterns": ["app_configuration.html.markdown"],
+      "associated_resource_patterns": [
+        "app_configuration_feature.html.markdown",
+        "app_configuration_key.html.markdown",
+        "monitor_diagnostic_setting.html.markdown",
+        "private_endpoint.html.markdown",
+        "role_assignment.html.markdown"
+      ]
+    },
+    "dev_center": {
+      "core_resource_patterns": ["dev_center.html.markdown"],
+      "associated_resource_patterns": [
+        "dev_center_attached_network.html.markdown",
+        "dev_center_catalogs.html.markdown",
+        "dev_center_dev_box_definition.html.markdown",
+        "dev_center_environment_type.html.markdown",
+        "dev_center_gallery.html.markdown",
+        "dev_center_network_connection.html.markdown",
+        "dev_center_project.html.markdown",
+        "dev_center_project_environment_type.html.markdown",
+        "dev_center_project_pool.html.markdown",
+        "monitor_diagnostic_setting.html.markdown",
+        "role_assignment.html.markdown"
+      ]
+    },
+    "signalr_service": {
+      "core_resource_patterns": ["signalr_service.html.markdown"],
+      "associated_resource_patterns": [
+        "monitor_diagnostic_setting.html.markdown",
+        "private_endpoint.html.markdown",
+        "role_assignment.html.markdown",
+        "signalr_service_custom_certificate.html.markdown",
+        "signalr_service_custom_domain.html.markdown",
+        "signalr_service_network_acl.html.markdown",
+        "signalr_shared_private_link.html.markdown"
+      ]
+    },
+    "web_pubsub": {
+      "core_resource_patterns": ["web_pubsub.html.markdown"],
+      "associated_resource_patterns": [
+        "monitor_diagnostic_setting.html.markdown",
+        "private_endpoint.html.markdown",
+        "role_assignment.html.markdown",
+        "web_pubsub_custom_certificate.html.markdown",
+        "web_pubsub_custom_domain.html.markdown",
+        "web_pubsub_hub.html.markdown",
+        "web_pubsub_network_acl.html.markdown",
+        "web_pubsub_shared_private_link.html.markdown",
+        "web_pubsub_socketio.html.markdown"
+      ]
+    },
+    "dev_test_lab": {
+      "core_resource_patterns": ["dev_test_lab.html.markdown"],
+      "associated_resource_patterns": [
+        "dev_test_global_vm_shutdown_schedule.html.markdown",
+        "dev_test_linux_virtual_machine.html.markdown",
+        "dev_test_policy.html.markdown",
+        "dev_test_schedule.html.markdown",
+        "dev_test_virtual_network.html.markdown",
+        "dev_test_windows_virtual_machine.html.markdown",
+        "monitor_diagnostic_setting.html.markdown",
+        "role_assignment.html.markdown"
+      ]
+    },
+    "graph_services_account": {
+      "core_resource_patterns": ["graph_services_account.html.markdown"],
+      "associated_resource_patterns": [
+        "monitor_diagnostic_setting.html.markdown",
+        "role_assignment.html.markdown"
+      ]
+    },
+    "load_test": {
+      "core_resource_patterns": ["load_test.html.markdown"],
+      "associated_resource_patterns": [
+        "monitor_diagnostic_setting.html.markdown",
+        "private_endpoint.html.markdown",
+        "role_assignment.html.markdown"
+      ]
+    },
+    "source_control_token": {
+      "core_resource_patterns": ["source_control_token.html.markdown"],
+      "associated_resource_patterns": [
+        "role_assignment.html.markdown"
+      ]
+    }
+  },
+  "Hybrid + Multicloud": {
+    "arc_kubernetes_cluster": {
+      "core_resource_patterns": ["arc_kubernetes_cluster.html.markdown"],
+      "associated_resource_patterns": [
+        "arc_kubernetes_cluster_extension.html.markdown",
+        "arc_kubernetes_flux_configuration.html.markdown",
+        "arc_kubernetes_provisioned_cluster.html.markdown",
+        "monitor_diagnostic_setting.html.markdown",
+        "role_assignment.html.markdown"
+      ]
+    },
+    "arc_machine": {
+      "core_resource_patterns": ["arc_machine.html.markdown"],
+      "associated_resource_patterns": [
+        "arc_machine_automanage_configuration_assignment.html.markdown",
+        "arc_machine_extension.html.markdown",
+        "monitor_diagnostic_setting.html.markdown",
+        "role_assignment.html.markdown"
+      ]
+    },
+    "stack_hci_cluster": {
+      "core_resource_patterns": ["stack_hci_cluster.html.markdown"],
+      "associated_resource_patterns": [
+        "monitor_diagnostic_setting.html.markdown",
+        "role_assignment.html.markdown",
+        "stack_hci_deployment_setting.html.markdown",
+        "stack_hci_extension.html.markdown",
+        "stack_hci_logical_network.html.markdown",
+        "stack_hci_marketplace_gallery_image.html.markdown",
+        "stack_hci_network_interface.html.markdown",
+        "stack_hci_storage_path.html.markdown",
+        "stack_hci_virtual_hard_disk.html.markdown"
+      ]
+    },
+    "arc_private_link_scope": {
+      "core_resource_patterns": ["arc_private_link_scope.html.markdown"],
+      "associated_resource_patterns": [
+        "monitor_diagnostic_setting.html.markdown",
+        "private_endpoint.html.markdown",
+        "role_assignment.html.markdown"
+      ]
+    },
+    "arc_resource_bridge_appliance": {
+      "core_resource_patterns": ["arc_resource_bridge_appliance.html.markdown"],
+      "associated_resource_patterns": [
+        "monitor_diagnostic_setting.html.markdown",
+        "role_assignment.html.markdown"
+      ]
+    },
+    "databox_edge_device": {
+      "core_resource_patterns": ["databox_edge_device.html.markdown"],
+      "associated_resource_patterns": [
+        "monitor_diagnostic_setting.html.markdown",
+        "role_assignment.html.markdown"
+      ]
+    },
+    "extended_location_custom_location": {
+      "core_resource_patterns": ["extended_location_custom_location.html.markdown"],
+      "associated_resource_patterns": [
+        "role_assignment.html.markdown"
+      ]
+    },
+    "system_center_virtual_machine_manager_server": {
+      "core_resource_patterns": ["system_center_virtual_machine_manager_server.html.markdown"],
+      "associated_resource_patterns": [
+        "role_assignment.html.markdown",
+        "system_center_virtual_machine_manager_availability_set.html.markdown",
+        "system_center_virtual_machine_manager_cloud.html.markdown",
+        "system_center_virtual_machine_manager_virtual_machine_instance.html.markdown",
+        "system_center_virtual_machine_manager_virtual_machine_template.html.markdown",
+        "system_center_virtual_machine_manager_virtual_network.html.markdown"
+      ]
+    },
+    "vmware_private_cloud": {
+      "core_resource_patterns": ["vmware_private_cloud.html.markdown"],
+      "associated_resource_patterns": [
+        "monitor_diagnostic_setting.html.markdown",
+        "role_assignment.html.markdown",
+        "vmware_cluster.html.markdown",
+        "vmware_express_route_authorization.html.markdown",
+        "vmware_netapp_volume_attachment.html.markdown"
+      ]
+    }
+  },
+  "Identity": {
+    "aadb2c_directory": {
+      "core_resource_patterns": ["aadb2c_directory.html.markdown"],
+      "associated_resource_patterns": [
+        "monitor_diagnostic_setting.html.markdown",
+        "role_assignment.html.markdown"
+      ]
+    },
+    "active_directory_domain_service": {
+      "core_resource_patterns": ["active_directory_domain_service.html.markdown"],
+      "associated_resource_patterns": [
+        "active_directory_domain_service_replica_set.html.markdown",
+        "active_directory_domain_service_trust.html.markdown",
+        "monitor_diagnostic_setting.html.markdown",
+        "role_assignment.html.markdown"
+      ]
+    },
+    "user_assigned_identity": {
+      "core_resource_patterns": ["user_assigned_identity.html.markdown"],
+      "associated_resource_patterns": [
+        "federated_identity_credential.html.markdown",
+        "role_assignment.html.markdown"
+      ]
+    }
+  },
+  "Integration": {
+    "api_management": {
+      "core_resource_patterns": ["api_management.html.markdown"],
+      "associated_resource_patterns": [
+        "api_management_api.html.markdown",
+        "api_management_api_diagnostic.html.markdown",
+        "api_management_api_operation.html.markdown",
+        "api_management_api_operation_policy.html.markdown",
+        "api_management_api_operation_tag.html.markdown",
+        "api_management_api_policy.html.markdown",
+        "api_management_api_release.html.markdown",
+        "api_management_api_schema.html.markdown",
+        "api_management_api_tag.html.markdown",
+        "api_management_api_tag_description.html.markdown",
+        "api_management_api_version_set.html.markdown",
+        "api_management_authorization_server.html.markdown",
+        "api_management_backend.html.markdown",
+        "api_management_certificate.html.markdown",
+        "api_management_custom_domain.html.markdown",
+        "api_management_diagnostic.html.markdown",
+        "api_management_email_template.html.markdown",
+        "api_management_gateway.html.markdown",
+        "api_management_gateway_api.html.markdown",
+        "api_management_gateway_certificate_authority.html.markdown",
+        "api_management_gateway_host_name_configuration.html.markdown",
+        "api_management_group.html.markdown",
+        "api_management_group_user.html.markdown",
+        "api_management_identity_provider_aad.html.markdown",
+        "api_management_identity_provider_aadb2c.html.markdown",
+        "api_management_identity_provider_facebook.html.markdown",
+        "api_management_identity_provider_google.html.markdown",
+        "api_management_identity_provider_microsoft.html.markdown",
+        "api_management_identity_provider_twitter.html.markdown",
+        "api_management_logger.html.markdown",
+        "api_management_named_value.html.markdown",
+        "api_management_notification_recipient_email.html.markdown",
+        "api_management_notification_recipient_user.html.markdown",
+        "api_management_openid_connect_provider.html.markdown",
+        "api_management_policy.html.markdown",
+        "api_management_policy_fragment.html.markdown",
+        "api_management_product.html.markdown",
+        "api_management_product_api.html.markdown",
+        "api_management_product_group.html.markdown",
+        "api_management_product_policy.html.markdown",
+        "api_management_product_tag.html.markdown",
+        "api_management_redis_cache.html.markdown",
+        "api_management_schema.html.markdown",
+        "api_management_subscription.html.markdown",
+        "api_management_tag.html.markdown",
+        "api_management_user.html.markdown",
+        "monitor_diagnostic_setting.html.markdown",
+        "private_endpoint.html.markdown",
+        "role_assignment.html.markdown"
+      ]
+    },
+    "logic_app_standard": {
+      "core_resource_patterns": ["logic_app_standard.html.markdown"],
+      "associated_resource_patterns": [
+        "app_service_plan.html.markdown",
+        "logic_app_action_custom.html.markdown",
+        "logic_app_action_http.html.markdown",
+        "logic_app_integration_account.html.markdown",
+        "logic_app_trigger_custom.html.markdown",
+        "logic_app_trigger_http_request.html.markdown",
+        "logic_app_trigger_recurrence.html.markdown",
+        "logic_app_workflow.html.markdown",
+        "monitor_diagnostic_setting.html.markdown",
+        "private_endpoint.html.markdown",
+        "role_assignment.html.markdown",
+        "storage_account.html.markdown"
+      ]
+    },
+    "logic_app_integration_account": {
+      "core_resource_patterns": ["logic_app_integration_account.html.markdown"],
+      "associated_resource_patterns": [
+        "logic_app_integration_account_agreement.html.markdown",
+        "logic_app_integration_account_assembly.html.markdown",
+        "logic_app_integration_account_batch_configuration.html.markdown",
+        "logic_app_integration_account_certificate.html.markdown",
+        "logic_app_integration_account_map.html.markdown",
+        "logic_app_integration_account_partner.html.markdown",
+        "logic_app_integration_account_schema.html.markdown",
+        "logic_app_integration_account_session.html.markdown",
+        "monitor_diagnostic_setting.html.markdown",
+        "role_assignment.html.markdown"
+      ]
+    },
+    "event_grid_topic": {
+      "core_resource_patterns": ["eventgrid_domain.html.markdown", "eventgrid_partner_namespace.html.markdown", "eventgrid_system_topic.html.markdown", "eventgrid_topic.html.markdown"],
+      "associated_resource_patterns": [
+        "eventgrid_domain_topic.html.markdown",
+        "eventgrid_event_subscription.html.markdown",
+        "eventgrid_partner_configuration.html.markdown",
+        "eventgrid_system_topic_event_subscription.html.markdown",
+        "monitor_diagnostic_setting.html.markdown",
+        "private_endpoint.html.markdown",
+        "role_assignment.html.markdown"
+      ]
+    },
+    "eventhub_namespace": {
+      "core_resource_patterns": ["eventhub_namespace.html.markdown"],
+      "associated_resource_patterns": [
+        "eventhub.html.markdown",
+        "eventhub_authorization_rule.html.markdown",
+        "eventhub_cluster.html.markdown",
+        "eventhub_consumer_group.html.markdown",
+        "eventhub_namespace_authorization_rule.html.markdown",
+        "eventhub_namespace_customer_managed_key.html.markdown",
+        "eventhub_namespace_disaster_recovery_config.html.markdown",
+        "eventhub_namespace_schema_group.html.markdown",
+        "monitor_diagnostic_setting.html.markdown",
+        "private_endpoint.html.markdown",
+        "role_assignment.html.markdown"
+      ]
+    },
+    "servicebus_namespace": {
+      "core_resource_patterns": ["servicebus_namespace.html.markdown"],
+      "associated_resource_patterns": [
+        "monitor_diagnostic_setting.html.markdown",
+        "private_endpoint.html.markdown",
+        "role_assignment.html.markdown",
+        "servicebus_namespace_authorization_rule.html.markdown",
+        "servicebus_namespace_customer_managed_key.html.markdown",
+        "servicebus_namespace_disaster_recovery_config.html.markdown",
+        "servicebus_queue.html.markdown",
+        "servicebus_queue_authorization_rule.html.markdown",
+        "servicebus_subscription.html.markdown",
+        "servicebus_subscription_rule.html.markdown",
+        "servicebus_topic.html.markdown",
+        "servicebus_topic_authorization_rule.html.markdown"
+      ]
+    },
+    "iothub": {
+      "core_resource_patterns": ["iothub.html.markdown"],
+      "associated_resource_patterns": [
+        "iothub_certificate.html.markdown",
+        "iothub_consumer_group.html.markdown",
+        "iothub_dps.html.markdown",
+        "iothub_endpoint_cosmosdb_account.html.markdown",
+        "iothub_endpoint_eventhub.html.markdown",
+        "iothub_endpoint_servicebus_queue.html.markdown",
+        "iothub_endpoint_servicebus_topic.html.markdown",
+        "iothub_endpoint_storage_container.html.markdown",
+        "iothub_enrichment.html.markdown",
+        "iothub_fallback_route.html.markdown",
+        "iothub_file_upload.html.markdown",
+        "iothub_route.html.markdown",
+        "iothub_shared_access_policy.html.markdown",
+        "monitor_diagnostic_setting.html.markdown",
+        "private_endpoint.html.markdown",
+        "role_assignment.html.markdown"
+      ]
+    },
+    "communication_service": {
+      "core_resource_patterns": ["communication_service.html.markdown"],
+      "associated_resource_patterns": [
+        "communication_service_email_domain_association.html.markdown",
+        "email_communication_service.html.markdown",
+        "email_communication_service_domain.html.markdown",
+        "monitor_diagnostic_setting.html.markdown",
+        "private_endpoint.html.markdown",
+        "role_assignment.html.markdown"
+      ]
+    },
+    "api_connection": {
+      "core_resource_patterns": ["api_connection.html.markdown"],
+      "associated_resource_patterns": [
+        "role_assignment.html.markdown"
+      ]
+    },
+    "eventgrid_namespace": {
+      "core_resource_patterns": ["eventgrid_namespace.html.markdown"],
+      "associated_resource_patterns": [
+        "monitor_diagnostic_setting.html.markdown",
+        "private_endpoint.html.markdown",
+        "role_assignment.html.markdown"
+      ]
+    },
+    "relay_namespace": {
+      "core_resource_patterns": ["relay_namespace.html.markdown"],
+      "associated_resource_patterns": [
+        "monitor_diagnostic_setting.html.markdown",
+        "private_endpoint.html.markdown",
+        "relay_hybrid_connection.html.markdown",
+        "relay_hybrid_connection_authorization_rule.html.markdown",
+        "relay_namespace_authorization_rule.html.markdown",
+        "role_assignment.html.markdown"
+      ]
+    },
+    "voice_services_communications_gateway": {
+      "core_resource_patterns": ["voice_services_communications_gateway.html.markdown"],
+      "associated_resource_patterns": [
+        "monitor_diagnostic_setting.html.markdown",
+        "role_assignment.html.markdown",
+        "voice_services_communications_gateway_test_line.html.markdown"
+      ]
+    }
+  },
+  "Management & Governance": {
+    "resource_group": {
+      "core_resource_patterns": ["resource_group.html.markdown"],
+      "associated_resource_patterns": [
+        "management_lock.html.markdown",
+        "resource_group_cost_management_view.html.markdown",
+        "resource_group_policy_assignment.html.markdown",
+        "resource_group_policy_exemption.html.markdown",
+        "resource_group_policy_remediation.html.markdown",
+        "resource_group_template_deployment.html.markdown",
+        "role_assignment.html.markdown"
+      ]
+    },
+    "policy_definition": {
+      "core_resource_patterns": ["policy_definition.html.markdown", "policy_set_definition.html.markdown"],
+      "associated_resource_patterns": [
+        "management_group_policy_assignment.html.markdown",
+        "policy_assignment.html.markdown",
+        "policy_remediation.html.markdown",
+        "resource_policy_assignment.html.markdown",
+        "resource_policy_exemption.html.markdown",
+        "resource_policy_remediation.html.markdown",
+        "subscription_policy_assignment.html.markdown",
+        "subscription_policy_exemption.html.markdown",
+        "subscription_policy_remediation.html.markdown"
+      ]
+    },
+    "automation_account": {
+      "core_resource_patterns": ["automation_account.html.markdown"],
+      "associated_resource_patterns": [
+        "automation_certificate.html.markdown",
+        "automation_connection.html.markdown",
+        "automation_connection_certificate.html.markdown",
+        "automation_connection_classic_certificate.html.markdown",
+        "automation_connection_service_principal.html.markdown",
+        "automation_connection_type.html.markdown",
+        "automation_credential.html.markdown",
+        "automation_dsc_configuration.html.markdown",
+        "automation_dsc_nodeconfiguration.html.markdown",
+        "automation_hybrid_runbook_worker.html.markdown",
+        "automation_hybrid_runbook_worker_group.html.markdown",
+        "automation_job_schedule.html.markdown",
+        "automation_module.html.markdown",
+        "automation_powershell72_module.html.markdown",
+        "automation_python3_package.html.markdown",
+        "automation_runbook.html.markdown",
+        "automation_schedule.html.markdown",
+        "automation_software_update_configuration.html.markdown",
+        "automation_source_control.html.markdown",
+        "automation_variable_bool.html.markdown",
+        "automation_variable_datetime.html.markdown",
+        "automation_variable_int.html.markdown",
+        "automation_variable_object.html.markdown",
+        "automation_variable_string.html.markdown",
+        "automation_watcher.html.markdown",
+        "automation_webhook.html.markdown",
+        "monitor_diagnostic_setting.html.markdown",
+        "role_assignment.html.markdown"
+      ]
+    },
+    "cost_management_export": {
+      "core_resource_patterns": ["billing_account_cost_management_export.html.markdown", "management_group_cost_management_export.html.markdown", "resource_group_cost_management_export.html.markdown", "subscription_cost_management_export.html.markdown"],
+      "associated_resource_patterns": [
+        "cost_anomaly_alert.html.markdown",
+        "cost_management_scheduled_action.html.markdown",
+        "role_assignment.html.markdown",
+        "storage_account.html.markdown"
+      ]
+    },
+    "management_group": {
+      "core_resource_patterns": ["management_group.html.markdown"],
+      "associated_resource_patterns": [
+        "management_group_policy_assignment.html.markdown",
+        "management_group_policy_exemption.html.markdown",
+        "management_group_policy_remediation.html.markdown",
+        "management_group_subscription_association.html.markdown",
+        "management_group_template_deployment.html.markdown",
+        "role_assignment.html.markdown"
+      ]
+    },
+    "blueprint_assignment": {
+      "core_resource_patterns": ["blueprint_assignment.html.markdown"],
+      "associated_resource_patterns": [
+        "role_assignment.html.markdown"
+      ]
+    },
+    "advisor_suppression": {
+      "core_resource_patterns": ["advisor_suppresion.html.markdown"],
+      "associated_resource_patterns": []
+    },
+    "automanage_configuration": {
+      "core_resource_patterns": ["automanage_configuration.html.markdown"],
+      "associated_resource_patterns": []
+    },
+    "lighthouse_definition": {
+      "core_resource_patterns": ["lighthouse_definition.html.markdown"],
+      "associated_resource_patterns": [
+        "lighthouse_assignment.html.markdown"
+      ]
+    },
+    "maintenance_configuration": {
+      "core_resource_patterns": ["maintenance_configuration.html.markdown"],
+      "associated_resource_patterns": [
+        "maintenance_assignment_dedicated_host.html.markdown",
+        "maintenance_assignment_dynamic_scope.html.markdown",
+        "maintenance_assignment_virtual_machine.html.markdown",
+        "maintenance_assignment_virtual_machine_scale_set.html.markdown"
+      ]
+    },
+    "resource_provider_registration": {
+      "core_resource_patterns": ["resource_provider_registration.html.markdown"],
+      "associated_resource_patterns": []
+    },
+    "consumption_budget_subscription": {
+      "core_resource_patterns": ["consumption_budget_subscription.html.markdown"],
+      "associated_resource_patterns": [
+        "consumption_budget_management_group.html.markdown",
+        "consumption_budget_resource_group.html.markdown",
+        "role_assignment.html.markdown"
+      ]
+    },
+    "custom_provider": {
+      "core_resource_patterns": ["custom_provider.html.markdown"],
+      "associated_resource_patterns": [
+        "role_assignment.html.markdown"
+      ]
+    },
+    "managed_application_definition": {
+      "core_resource_patterns": ["managed_application_definition.html.markdown"],
+      "associated_resource_patterns": [
+        "managed_application.html.markdown",
+        "role_assignment.html.markdown"
+      ]
+    },
+    "marketplace_agreement": {
+      "core_resource_patterns": ["marketplace_agreement.html.markdown"],
+      "associated_resource_patterns": []
+    },
+    "portal_dashboard": {
+      "core_resource_patterns": ["portal_dashboard.html.markdown"],
+      "associated_resource_patterns": [
+        "role_assignment.html.markdown"
+      ]
+    },
+    "portal_tenant_configuration": {
+      "core_resource_patterns": ["portal_tenant_configuration.html.markdown"],
+      "associated_resource_patterns": []
+    },
+    "resource_deployment_script_azure_cli": {
+      "core_resource_patterns": ["resource_deployment_script_azure_cli.html.markdown"],
+      "associated_resource_patterns": [
+        "role_assignment.html.markdown"
+      ]
+    },
+    "resource_deployment_script_azure_power_shell": {
+      "core_resource_patterns": ["resource_deployment_script_azure_power_shell.html.markdown"],
+      "associated_resource_patterns": [
+        "role_assignment.html.markdown"
+      ]
+    },
+    "resource_management_private_link": {
+      "core_resource_patterns": ["resource_management_private_link.html.markdown"],
+      "associated_resource_patterns": [
+        "resource_management_private_link_association.html.markdown",
+        "role_assignment.html.markdown"
+      ]
+    },
+    "subscription": {
+      "core_resource_patterns": ["subscription.html.markdown"],
+      "associated_resource_patterns": [
+        "role_assignment.html.markdown",
+        "subscription_cost_management_view.html.markdown",
+        "subscription_policy_exemption.html.markdown",
+        "subscription_policy_remediation.html.markdown",
+        "subscription_template_deployment.html.markdown"
+      ]
+    },
+    "tenant_template_deployment": {
+      "core_resource_patterns": ["tenant_template_deployment.html.markdown"],
+      "associated_resource_patterns": [
+        "role_assignment.html.markdown"
+      ]
+    }
+  },
+  "Monitor": {
+    "application_insights": {
+      "core_resource_patterns": ["application_insights.html.markdown"],
+      "associated_resource_patterns": [
+        "application_insights_analytics_item.html.markdown",
+        "application_insights_api_key.html.markdown",
+        "application_insights_smart_detection_rule.html.markdown",
+        "application_insights_standard_web_test.html.markdown",
+        "application_insights_web_test.html.markdown",
+        "application_insights_workbook.html.markdown",
+        "application_insights_workbook_template.html.markdown",
+        "log_analytics_workspace.html.markdown",
+        "monitor_diagnostic_setting.html.markdown",
+        "monitor_smart_detector_alert_rule.html.markdown",
+        "role_assignment.html.markdown"
+      ]
+    },
+    "monitor_action_group": {
+      "core_resource_patterns": ["monitor_action_group.html.markdown"],
+      "associated_resource_patterns": []
+    },
+    "monitor_metric_alert": {
+      "core_resource_patterns": ["monitor_metric_alert.html.markdown", "monitor_scheduled_query_rules_alert.html.markdown"],
+      "associated_resource_patterns": [
+        "monitor_action_group.html.markdown",
+        "monitor_alert_processing_rule_action_group.html.markdown",
+        "monitor_alert_processing_rule_suppression.html.markdown",
+        "monitor_alert_prometheus_rule_group.html.markdown",
+        "monitor_scheduled_query_rules_alert_v2.html.markdown",
+        "monitor_scheduled_query_rules_log.html.markdown"
+      ]
+    },
+    "monitor_activity_log_alert": {
+      "core_resource_patterns": ["monitor_activity_log_alert.html.markdown"],
+      "associated_resource_patterns": [
+        "monitor_action_group.html.markdown"
+      ]
+    },
+    "monitor_autoscale_setting": {
+      "core_resource_patterns": ["monitor_autoscale_setting.html.markdown"],
+      "associated_resource_patterns": [
+        "monitor_action_group.html.markdown"
+      ]
+    },
+    "monitor_data_collection_rule": {
+      "core_resource_patterns": ["monitor_data_collection_rule.html.markdown"],
+      "associated_resource_patterns": [
+        "log_analytics_workspace.html.markdown",
+        "monitor_data_collection_endpoint.html.markdown",
+        "monitor_data_collection_rule_association.html.markdown",
+        "role_assignment.html.markdown"
+      ]
+    },
+    "monitor_private_link_scope": {
+      "core_resource_patterns": ["monitor_private_link_scope.html.markdown"],
+      "associated_resource_patterns": [
+        "monitor_private_link_scoped_service.html.markdown",
+        "role_assignment.html.markdown"
+      ]
+    },
+    "dashboard_grafana": {
+      "core_resource_patterns": ["dashboard_grafana.html.markdown"],
+      "associated_resource_patterns": [
+        "dashboard_grafana_managed_private_endpoint.html.markdown",
+        "monitor_diagnostic_setting.html.markdown",
+        "private_endpoint.html.markdown",
+        "role_assignment.html.markdown"
+      ]
+    },
+    "datadog_monitors": {
+      "core_resource_patterns": ["datadog_monitors.html.markdown"],
+      "associated_resource_patterns": [
+        "datadog_monitor_sso_configuration.html.markdown",
+        "datadog_monitor_tag_rule.html.markdown",
+        "monitor_diagnostic_setting.html.markdown",
+        "role_assignment.html.markdown"
+      ]
+    },
+    "dynatrace_monitors": {
+      "core_resource_patterns": ["dynatrace_monitors.html.markdown"],
+      "associated_resource_patterns": [
+        "dynatrace_tag_rules.html.markdown",
+        "monitor_diagnostic_setting.html.markdown",
+        "role_assignment.html.markdown"
+      ]
+    },
+    "monitor_aad_diagnostic_setting": {
+      "core_resource_patterns": ["monitor_aad_diagnostic_setting.html.markdown"],
+      "associated_resource_patterns": [
+        "monitor_action_group.html.markdown",
+        "role_assignment.html.markdown"
+      ]
+    },
+    "monitor_workspace": {
+      "core_resource_patterns": ["monitor_workspace.html.markdown"],
+      "associated_resource_patterns": [
+        "monitor_diagnostic_setting.html.markdown",
+        "private_endpoint.html.markdown",
+        "role_assignment.html.markdown"
+      ]
+    },
+    "new_relic_monitor": {
+      "core_resource_patterns": ["new_relic_monitor.html.markdown"],
+      "associated_resource_patterns": [
+        "monitor_diagnostic_setting.html.markdown",
+        "new_relic_tag_rule.html.markdown",
+        "role_assignment.html.markdown"
+      ]
+    }
+  },
+  "Network": {
+    "virtual_network": {
+      "core_resource_patterns": ["virtual_network.html.markdown"],
+      "associated_resource_patterns": [
+        "dns_zone_virtual_network_link.html.markdown",
+        "monitor_diagnostic_setting.html.markdown",
+        "nat_gateway.html.markdown",
+        "network_ddos_protection_plan.html.markdown",
+        "private_dns_resolver_virtual_network_link.html.markdown",
+        "private_dns_zone_virtual_network_link.html.markdown",
+        "role_assignment.html.markdown",
+        "subnet.html.markdown",
+        "virtual_network_dns_servers.html.markdown",
+        "virtual_network_peering.html.markdown"
+      ]
+    },
+    "subnet": {
+      "core_resource_patterns": ["subnet.html.markdown"],
+      "associated_resource_patterns": [
+        "network_interface_subnet_association.html.markdown",
+        "role_assignment.html.markdown",
+        "subnet_nat_gateway_association.html.markdown",
+        "subnet_network_security_group_association.html.markdown",
+        "subnet_route_table_association.html.markdown",
+        "subnet_service_endpoint_storage_policy.html.markdown"
+      ]
+    },
+    "network_security_group": {
+      "core_resource_patterns": ["network_security_group.html.markdown"],
+      "associated_resource_patterns": [
+        "monitor_diagnostic_setting.html.markdown",
+        "network_security_rule.html.markdown",
+        "role_assignment.html.markdown"
+      ]
+    },
+    "route_table": {
+      "core_resource_patterns": ["route_table.html.markdown"],
+      "associated_resource_patterns": [
+        "role_assignment.html.markdown",
+        "route.html.markdown"
+      ]
+    },
+    "public_ip": {
+      "core_resource_patterns": ["public_ip.html.markdown", "public_ip_prefix.html.markdown"],
+      "associated_resource_patterns": [
+        "custom_ip_prefix.html.markdown",
+        "monitor_diagnostic_setting.html.markdown",
+        "role_assignment.html.markdown"
+      ]
+    },
+    "load_balancer": {
+      "core_resource_patterns": ["lb.html.markdown"],
+      "associated_resource_patterns": [
+        "lb_backend_address_pool.html.markdown",
+        "lb_backend_address_pool_address.html.markdown",
+        "lb_nat_pool.html.markdown",
+        "lb_nat_rule.html.markdown",
+        "lb_outbound_rule.html.markdown",
+        "lb_probe.html.markdown",
+        "lb_rule.html.markdown",
+        "monitor_diagnostic_setting.html.markdown",
+        "public_ip.html.markdown",
+        "role_assignment.html.markdown"
+      ]
+    },
+    "application_gateway": {
+      "core_resource_patterns": ["application_gateway.html.markdown"],
+      "associated_resource_patterns": [
+        "monitor_diagnostic_setting.html.markdown",
+        "public_ip.html.markdown",
+        "role_assignment.html.markdown",
+        "subnet.html.markdown",
+        "web_application_firewall_policy.html.markdown"
+      ]
+    },
+    "firewall": {
+      "core_resource_patterns": ["firewall.html.markdown", "firewall_policy.html.markdown"],
+      "associated_resource_patterns": [
+        "firewall_application_rule_collection.html.markdown",
+        "firewall_nat_rule_collection.html.markdown",
+        "firewall_network_rule_collection.html.markdown",
+        "firewall_policy_rule_collection_group.html.markdown",
+        "monitor_diagnostic_setting.html.markdown",
+        "public_ip.html.markdown",
+        "role_assignment.html.markdown",
+        "virtual_network.html.markdown"
+      ]
+    },
+    "dns_zone": {
+      "core_resource_patterns": ["dns_zone.html.markdown", "private_dns_zone.html.markdown"],
+      "associated_resource_patterns": [
+        "dns_a_record.html.markdown",
+        "dns_aaaa_record.html.markdown",
+        "dns_caa_record.html.markdown",
+        "dns_cname_record.html.markdown",
+        "dns_mx_record.html.markdown",
+        "dns_ns_record.html.markdown",
+        "dns_ptr_record.html.markdown",
+        "dns_srv_record.html.markdown",
+        "dns_txt_record.html.markdown",
+        "private_dns_a_record.html.markdown",
+        "private_dns_aaaa_record.html.markdown",
+        "private_dns_cname_record.html.markdown",
+        "private_dns_mx_record.html.markdown",
+        "private_dns_ptr_record.html.markdown",
+        "private_dns_srv_record.html.markdown",
+        "private_dns_txt_record.html.markdown",
+        "private_dns_zone_virtual_network_link.html.markdown",
+        "role_assignment.html.markdown"
+      ]
+    },
+    "private_endpoint": {
+      "core_resource_patterns": ["private_endpoint.html.markdown"],
+      "associated_resource_patterns": [
+        "network_interface.html.markdown",
+        "private_dns_zone.html.markdown",
+        "private_dns_zone_group.html.markdown",
+        "private_endpoint_application_security_group_association.html.markdown",
+        "role_assignment.html.markdown"
+      ]
+    },
+    "virtual_wan": {
+      "core_resource_patterns": ["virtual_wan.html.markdown"],
+      "associated_resource_patterns": [
+        "express_route_gateway.html.markdown",
+        "firewall.html.markdown",
+        "monitor_diagnostic_setting.html.markdown",
+        "point_to_site_vpn_gateway.html.markdown",
+        "role_assignment.html.markdown",
+        "virtual_hub.html.markdown",
+        "virtual_hub_bgp_connection.html.markdown",
+        "virtual_hub_connection.html.markdown",
+        "virtual_hub_ip.html.markdown",
+        "virtual_hub_route_table.html.markdown",
+        "virtual_hub_route_table_route.html.markdown",
+        "virtual_hub_routing_intent.html.markdown",
+        "virtual_hub_security_partner_provider.html.markdown",
+        "vpn_gateway.html.markdown"
+      ]
+    },
+    "bastion_host": {
+      "core_resource_patterns": ["bastion_host.html.markdown"],
+      "associated_resource_patterns": [
+        "monitor_diagnostic_setting.html.markdown",
+        "public_ip.html.markdown",
+        "role_assignment.html.markdown",
+        "subnet.html.markdown"
+      ]
+    },
+    "cdn_profile": {
+      "core_resource_patterns": ["cdn_frontdoor_profile.html.markdown", "cdn_profile.html.markdown"],
+      "associated_resource_patterns": [
+        "cdn_endpoint.html.markdown",
+        "cdn_endpoint_custom_domain.html.markdown",
+        "cdn_frontdoor_custom_domain.html.markdown",
+        "cdn_frontdoor_custom_domain_association.html.markdown",
+        "cdn_frontdoor_endpoint.html.markdown",
+        "cdn_frontdoor_firewall_policy.html.markdown",
+        "cdn_frontdoor_origin.html.markdown",
+        "cdn_frontdoor_origin_group.html.markdown",
+        "cdn_frontdoor_route.html.markdown",
+        "cdn_frontdoor_rule.html.markdown",
+        "cdn_frontdoor_rule_set.html.markdown",
+        "cdn_frontdoor_secret.html.markdown",
+        "cdn_frontdoor_security_policy.html.markdown",
+        "monitor_diagnostic_setting.html.markdown",
+        "role_assignment.html.markdown"
+      ]
+    },
+    "express_route_circuit": {
+      "core_resource_patterns": ["express_route_circuit.html.markdown"],
+      "associated_resource_patterns": [
+        "express_route_circuit_authorization.html.markdown",
+        "express_route_circuit_connection.html.markdown",
+        "express_route_circuit_peering.html.markdown",
+        "express_route_connection.html.markdown",
+        "express_route_port.html.markdown",
+        "express_route_port_authorization.html.markdown",
+        "monitor_diagnostic_setting.html.markdown",
+        "role_assignment.html.markdown"
+      ]
+    },
+    "nat_gateway": {
+      "core_resource_patterns": ["nat_gateway.html.markdown"],
+      "associated_resource_patterns": [
+        "monitor_diagnostic_setting.html.markdown",
+        "nat_gateway_public_ip_association.html.markdown",
+        "nat_gateway_public_ip_prefix_association.html.markdown",
+        "role_assignment.html.markdown",
+        "subnet_nat_gateway_association.html.markdown"
+      ]
+    },
+    "network_watcher": {
+      "core_resource_patterns": ["network_watcher.html.markdown"],
+      "associated_resource_patterns": [
+        "network_connection_monitor.html.markdown",
+        "network_watcher_flow_log.html.markdown",
+        "role_assignment.html.markdown"
+      ]
+    },
+    "traffic_manager_profile": {
+      "core_resource_patterns": ["traffic_manager_profile.html.markdown"],
+      "associated_resource_patterns": [
+        "monitor_diagnostic_setting.html.markdown",
+        "role_assignment.html.markdown",
+        "traffic_manager_azure_endpoint.html.markdown",
+        "traffic_manager_external_endpoint.html.markdown",
+        "traffic_manager_nested_endpoint.html.markdown"
+      ]
+    },
+    "virtual_network_gateway": {
+      "core_resource_patterns": ["virtual_network_gateway.html.markdown"],
+      "associated_resource_patterns": [
+        "local_network_gateway.html.markdown",
+        "monitor_diagnostic_setting.html.markdown",
+        "public_ip.html.markdown",
+        "role_assignment.html.markdown",
+        "virtual_network_gateway_connection.html.markdown",
+        "virtual_network_gateway_nat_rule.html.markdown"
+      ]
+    },
+    "vpn_server_configuration": {
+      "core_resource_patterns": ["vpn_server_configuration.html.markdown"],
+      "associated_resource_patterns": [
+        "role_assignment.html.markdown",
+        "vpn_server_configuration_policy_group.html.markdown",
+        "vpn_site.html.markdown"
+      ]
+    },
+    "application_load_balancer": {
+      "core_resource_patterns": ["application_load_balancer.html.markdown"],
+      "associated_resource_patterns": [
+        "application_load_balancer_frontend.html.markdown",
+        "application_load_balancer_subnet_association.html.markdown",
+        "monitor_diagnostic_setting.html.markdown",
+        "private_endpoint.html.markdown",
+        "role_assignment.html.markdown"
+      ]
+    },
+    "application_security_group": {
+      "core_resource_patterns": ["application_security_group.html.markdown"],
+      "associated_resource_patterns": [
+        "monitor_diagnostic_setting.html.markdown",
+        "role_assignment.html.markdown"
+      ]
+    },
+    "frontdoor": {
+      "core_resource_patterns": ["frontdoor.html.markdown"],
+      "associated_resource_patterns": [
+        "frontdoor_custom_https_configuration.html.markdown",
+        "frontdoor_firewall_policy.html.markdown",
+        "frontdoor_rules_engine.html.markdown",
+        "monitor_diagnostic_setting.html.markdown",
+        "role_assignment.html.markdown"
+      ]
+    },
+    "ip_group": {
+      "core_resource_patterns": ["ip_group.html.markdown"],
+      "associated_resource_patterns": [
+        "ip_group_cidr.html.markdown",
+        "monitor_diagnostic_setting.html.markdown",
+        "role_assignment.html.markdown"
+      ]
+    },
+    "mobile_network": {
+      "core_resource_patterns": ["mobile_network.html.markdown"],
+      "associated_resource_patterns": [
+        "mobile_network_attached_data_network.html.markdown",
+        "mobile_network_data_network.html.markdown",
+        "mobile_network_packet_core_control_plane.html.markdown",
+        "mobile_network_packet_core_data_plane.html.markdown",
+        "mobile_network_service.html.markdown",
+        "mobile_network_sim.html.markdown",
+        "mobile_network_sim_group.html.markdown",
+        "mobile_network_sim_policy.html.markdown",
+        "mobile_network_site.html.markdown",
+        "mobile_network_slice.html.markdown",
+        "monitor_diagnostic_setting.html.markdown",
+        "role_assignment.html.markdown"
+      ]
+    },
+    "network_function_azure_traffic_collector": {
+      "core_resource_patterns": ["network_function_azure_traffic_collector.html.markdown"],
+      "associated_resource_patterns": [
+        "monitor_diagnostic_setting.html.markdown",
+        "network_function_collector_policy.html.markdown",
+        "role_assignment.html.markdown"
+      ]
+    },
+    "network_manager": {
+      "core_resource_patterns": ["network_manager.html.markdown"],
+      "associated_resource_patterns": [
+        "network_manager_admin_rule.html.markdown",
+        "network_manager_admin_rule_collection.html.markdown",
+        "network_manager_connectivity_configuration.html.markdown",
+        "network_manager_deployment.html.markdown",
+        "network_manager_ipam_pool.html.markdown",
+        "network_manager_management_group_connection.html.markdown",
+        "network_manager_network_group.html.markdown",
+        "network_manager_scope_connection.html.markdown",
+        "network_manager_security_admin_configuration.html.markdown",
+        "network_manager_static_member.html.markdown",
+        "network_manager_subscription_connection.html.markdown",
+        "network_manager_verifier_workspace.html.markdown",
+        "role_assignment.html.markdown"
+      ]
+    },
+    "network_profile": {
+      "core_resource_patterns": ["network_profile.html.markdown"],
+      "associated_resource_patterns": [
+        "monitor_diagnostic_setting.html.markdown",
+        "role_assignment.html.markdown"
+      ]
+    },
+    "palo_alto_local_rulestack": {
+      "core_resource_patterns": ["palo_alto_local_rulestack.html.markdown"],
+      "associated_resource_patterns": [
+        "monitor_diagnostic_setting.html.markdown",
+        "palo_alto_local_rulestack_certificate.html.markdown",
+        "palo_alto_local_rulestack_fqdn_list.html.markdown",
+        "palo_alto_local_rulestack_outbound_trust_certificate_association.html.markdown",
+        "palo_alto_local_rulestack_outbound_untrust_certificate_association.html.markdown",
+        "palo_alto_local_rulestack_prefix_list.html.markdown",
+        "palo_alto_local_rulestack_rule.html.markdown",
+        "role_assignment.html.markdown"
+      ]
+    },
+    "palo_alto_next_generation_firewall_virtual_network_local_rulestack": {
+      "core_resource_patterns": ["palo_alto_next_generation_firewall_virtual_network_local_rulestack.html.markdown"],
+      "associated_resource_patterns": [
+        "monitor_diagnostic_setting.html.markdown",
+        "palo_alto_network_virtual_appliance.html.markdown",
+        "palo_alto_next_generation_firewall_vhub_local_rulestack.html.markdown",
+        "palo_alto_next_generation_firewall_vhub_panorama.html.markdown",
+        "palo_alto_next_generation_firewall_virtual_network_panorama.html.markdown",
+        "role_assignment.html.markdown"
+      ]
+    },
+    "private_dns_resolver": {
+      "core_resource_patterns": ["private_dns_resolver.html.markdown"],
+      "associated_resource_patterns": [
+        "monitor_diagnostic_setting.html.markdown",
+        "private_dns_resolver_dns_forwarding_ruleset.html.markdown",
+        "private_dns_resolver_forwarding_rule.html.markdown",
+        "private_dns_resolver_inbound_endpoint.html.markdown",
+        "private_dns_resolver_outbound_endpoint.html.markdown",
+        "private_dns_resolver_virtual_network_link.html.markdown",
+        "role_assignment.html.markdown"
+      ]
+    },
+    "private_link_service": {
+      "core_resource_patterns": ["private_link_service.html.markdown"],
+      "associated_resource_patterns": [
+        "monitor_diagnostic_setting.html.markdown",
+        "private_endpoint.html.markdown",
+        "role_assignment.html.markdown"
+      ]
+    },
+    "route_filter": {
+      "core_resource_patterns": ["route_filter.html.markdown"],
+      "associated_resource_patterns": [
+        "role_assignment.html.markdown"
+      ]
+    },
+    "route_map": {
+      "core_resource_patterns": ["route_map.html.markdown"],
+      "associated_resource_patterns": [
+        "role_assignment.html.markdown"
+      ]
+    },
+    "route_server": {
+      "core_resource_patterns": ["route_server.html.markdown"],
+      "associated_resource_patterns": [
+        "monitor_diagnostic_setting.html.markdown",
+        "role_assignment.html.markdown",
+        "route_server_bgp_connection.html.markdown"
+      ]
+    }
+  },
+  "Security": {
+    "key_vault": {
+      "core_resource_patterns": ["key_vault.html.markdown"],
+      "associated_resource_patterns": [
+        "key_vault_access_policy.html.markdown",
+        "key_vault_certificate.html.markdown",
+        "key_vault_certificate_contacts.html.markdown",
+        "key_vault_certificate_issuer.html.markdown",
+        "key_vault_key.html.markdown",
+        "key_vault_managed_hardware_security_module.html.markdown",
+        "key_vault_managed_hardware_security_module_key.html.markdown",
+        "key_vault_managed_hardware_security_module_key_rotation_policy.html.markdown",
+        "key_vault_managed_hardware_security_module_role_assignment.html.markdown",
+        "key_vault_managed_hardware_security_module_role_definition.html.markdown",
+        "key_vault_managed_storage_account.html.markdown",
+        "key_vault_managed_storage_account_sas_token_definition.html.markdown",
+        "key_vault_secret.html.markdown",
+        "monitor_diagnostic_setting.html.markdown",
+        "private_endpoint.html.markdown",
+        "role_assignment.html.markdown"
+      ]
+    },
+    "role_assignment": {
+      "core_resource_patterns": ["role_assignment.html.markdown"],
+      "associated_resource_patterns": [
+        "pim_active_role_assignment.html.markdown",
+        "pim_eligible_role_assignment.html.markdown",
+        "role_assignment_marketplace.html.markdown",
+        "role_definition.html.markdown",
+        "role_management_policy.html.markdown"
+      ]
+    },
+    "sentinel": {
+      "core_resource_patterns": ["sentinel_log_analytics_workspace_onboarding.html.markdown"],
+      "associated_resource_patterns": [
+        "log_analytics_workspace.html.markdown",
+        "role_assignment.html.markdown",
+        "sentinel_alert_rule_anomaly_built_in.html.markdown",
+        "sentinel_alert_rule_anomaly_duplicate.html.markdown",
+        "sentinel_alert_rule_fusion.html.markdown",
+        "sentinel_alert_rule_machine_learning_behavior_analytics.html.markdown",
+        "sentinel_alert_rule_ms_security_incident.html.markdown",
+        "sentinel_alert_rule_nrt.html.markdown",
+        "sentinel_alert_rule_scheduled.html.markdown",
+        "sentinel_alert_rule_threat_intelligence.html.markdown",
+        "sentinel_automation_rule.html.markdown",
+        "sentinel_data_connector_aws_cloud_trail.html.markdown",
+        "sentinel_data_connector_aws_s3.html.markdown",
+        "sentinel_data_connector_azure_active_directory.html.markdown",
+        "sentinel_data_connector_azure_advanced_threat_protection.html.markdown",
+        "sentinel_data_connector_azure_security_center.html.markdown",
+        "sentinel_data_connector_dynamics_365.html.markdown",
+        "sentinel_data_connector_iot.html.markdown",
+        "sentinel_data_connector_microsoft_cloud_app_security.html.markdown",
+        "sentinel_data_connector_microsoft_defender_advanced_threat_protection.html.markdown",
+        "sentinel_data_connector_microsoft_threat_intelligence.html.markdown",
+        "sentinel_data_connector_microsoft_threat_protection.html.markdown",
+        "sentinel_data_connector_office_365.html.markdown",
+        "sentinel_data_connector_office_365_project.html.markdown",
+        "sentinel_data_connector_office_atp.html.markdown",
+        "sentinel_data_connector_office_irm.html.markdown",
+        "sentinel_data_connector_office_power_bi.html.markdown",
+        "sentinel_data_connector_threat_intelligence.html.markdown",
+        "sentinel_data_connector_threat_intelligence_taxii.html.markdown",
+        "sentinel_metadata.html.markdown",
+        "sentinel_threat_intelligence_indicator.html.markdown",
+        "sentinel_watchlist.html.markdown",
+        "sentinel_watchlist_item.html.markdown"
+      ]
+    },
+    "security_center": {
+      "core_resource_patterns": ["security_center_setting.html.markdown", "security_center_subscription_pricing.html.markdown"],
+      "associated_resource_patterns": [
+        "log_analytics_workspace.html.markdown",
+        "role_assignment.html.markdown",
+        "security_center_assessment.html.markdown",
+        "security_center_assessment_policy.html.markdown",
+        "security_center_auto_provisioning.html.markdown",
+        "security_center_automation.html.markdown",
+        "security_center_contact.html.markdown",
+        "security_center_server_vulnerability_assessment_virtual_machine.html.markdown",
+        "security_center_server_vulnerability_assessments_setting.html.markdown",
+        "security_center_storage_defender.html.markdown",
+        "security_center_workspace.html.markdown"
+      ]
+    },
+    "attestation_provider": {
+      "core_resource_patterns": ["attestation_provider.html.markdown"],
+      "associated_resource_patterns": [
+        "monitor_diagnostic_setting.html.markdown",
+        "private_endpoint.html.markdown",
+        "role_assignment.html.markdown"
+      ]
+    },
+    "dedicated_hardware_security_module": {
+      "core_resource_patterns": ["dedicated_hardware_security_module.html.markdown"],
+      "associated_resource_patterns": [
+        "monitor_diagnostic_setting.html.markdown",
+        "role_assignment.html.markdown",
+        "subnet.html.markdown"
+      ]
+    },
+    "information_protection_policy": {
+      "core_resource_patterns": ["information_protection_policy.html.markdown"],
+      "associated_resource_patterns": []
+    },
+    "trusted_signing_account": {
+      "core_resource_patterns": ["trusted_signing_account.html.markdown"],
+      "associated_resource_patterns": [
+        "monitor_diagnostic_setting.html.markdown",
+        "role_assignment.html.markdown"
+      ]
+    }
+  },
+  "Storage": {
+    "storage_account": {
+      "core_resource_patterns": ["storage_account.html.markdown"],
+      "associated_resource_patterns": [
+        "advanced_threat_protection.html.markdown",
+        "monitor_diagnostic_setting.html.markdown",
+        "private_endpoint.html.markdown",
+        "role_assignment.html.markdown",
+        "storage_account_customer_managed_key.html.markdown",
+        "storage_account_local_user.html.markdown",
+        "storage_account_network_rules.html.markdown",
+        "storage_account_queue_properties.html.markdown",
+        "storage_account_static_website.html.markdown",
+        "storage_blob.html.markdown",
+        "storage_blob_inventory_policy.html.markdown",
+        "storage_container.html.markdown",
+        "storage_container_immutability_policy.html.markdown",
+        "storage_data_lake_gen2_filesystem.html.markdown",
+        "storage_data_lake_gen2_path.html.markdown",
+        "storage_encryption_scope.html.markdown",
+        "storage_management_policy.html.markdown",
+        "storage_object_replication.html.markdown",
+        "storage_queue.html.markdown",
+        "storage_share.html.markdown",
+        "storage_share_directory.html.markdown",
+        "storage_share_file.html.markdown",
+        "storage_table.html.markdown",
+        "storage_table_entity.html.markdown"
+      ]
+    },
+    "managed_disk": {
+      "core_resource_patterns": ["managed_disk.html.markdown"],
+      "associated_resource_patterns": [
+        "disk_encryption_set.html.markdown",
+        "disk_sas_token.html.markdown",
+        "role_assignment.html.markdown",
+        "snapshot.html.markdown"
+      ]
+    },
+    "storage_sync": {
+      "core_resource_patterns": ["storage_sync.html.markdown"],
+      "associated_resource_patterns": [
+        "monitor_diagnostic_setting.html.markdown",
+        "role_assignment.html.markdown",
+        "storage_account.html.markdown",
+        "storage_sync_cloud_endpoint.html.markdown",
+        "storage_sync_group.html.markdown",
+        "storage_sync_server_endpoint.html.markdown"
+      ]
+    },
+    "netapp_account": {
+      "core_resource_patterns": ["netapp_account.html.markdown"],
+      "associated_resource_patterns": [
+        "monitor_diagnostic_setting.html.markdown",
+        "netapp_account_encryption.html.markdown",
+        "netapp_backup_policy.html.markdown",
+        "netapp_backup_vault.html.markdown",
+        "netapp_pool.html.markdown",
+        "netapp_snapshot.html.markdown",
+        "netapp_snapshot_policy.html.markdown",
+        "netapp_volume.html.markdown",
+        "netapp_volume_group_oracle.html.markdown",
+        "netapp_volume_group_sap_hana.html.markdown",
+        "netapp_volume_quota_rule.html.markdown",
+        "private_endpoint.html.markdown",
+        "role_assignment.html.markdown"
+      ]
+    },
+    "storage_mover": {
+      "core_resource_patterns": ["storage_mover.html.markdown"],
+      "associated_resource_patterns": [
+        "monitor_diagnostic_setting.html.markdown",
+        "role_assignment.html.markdown",
+        "storage_mover_agent.html.markdown",
+        "storage_mover_job_definition.html.markdown",
+        "storage_mover_project.html.markdown",
+        "storage_mover_source_endpoint.html.markdown",
+        "storage_mover_target_endpoint.html.markdown"
+      ]
+    },
+    "elastic_san": {
+      "core_resource_patterns": ["elastic_san.html.markdown"],
+      "associated_resource_patterns": [
+        "elastic_san_volume.html.markdown",
+        "elastic_san_volume_group.html.markdown",
+        "monitor_diagnostic_setting.html.markdown",
+        "private_endpoint.html.markdown",
+        "role_assignment.html.markdown"
+      ]
+    },
+    "managed_lustre_file_system": {
+      "core_resource_patterns": ["managed_lustre_file_system.html.markdown"],
+      "associated_resource_patterns": [
+        "monitor_diagnostic_setting.html.markdown",
+        "private_endpoint.html.markdown",
+        "role_assignment.html.markdown"
+      ]
+    }
+  },
+  "Backup & Recovery": {
+    "recovery_services_vault": {
+      "core_resource_patterns": ["recovery_services_vault.html.markdown"],
+      "associated_resource_patterns": [
+        "backup_container_storage_account.html.markdown",
+        "backup_policy_file_share.html.markdown",
+        "backup_policy_vm.html.markdown",
+        "backup_policy_vm_workload.html.markdown",
+        "backup_protected_file_share.html.markdown",
+        "backup_protected_vm.html.markdown",
+        "monitor_diagnostic_setting.html.markdown",
+        "private_endpoint.html.markdown",
+        "recovery_services_vault_resource_guard_association.html.markdown",
+        "role_assignment.html.markdown",
+        "site_recovery_fabric.html.markdown",
+        "site_recovery_hyperv_network_mapping.html.markdown",
+        "site_recovery_hyperv_replication_policy.html.markdown",
+        "site_recovery_hyperv_replication_policy_association.html.markdown",
+        "site_recovery_network_mapping.html.markdown",
+        "site_recovery_protection_container.html.markdown",
+        "site_recovery_protection_container_mapping.html.markdown",
+        "site_recovery_replicated_vm.html.markdown",
+        "site_recovery_replication_policy.html.markdown",
+        "site_recovery_replication_recovery_plan.html.markdown",
+        "site_recovery_services_vault_hyperv_site.html.markdown",
+        "site_recovery_vmware_replicated_vm.html.markdown",
+        "site_recovery_vmware_replication_policy.html.markdown",
+        "site_recovery_vmware_replication_policy_association.html.markdown"
+      ]
+    },
+    "data_protection_backup_vault": {
+      "core_resource_patterns": ["data_protection_backup_vault.html.markdown"],
+      "associated_resource_patterns": [
+        "data_protection_backup_instance_blob_storage.html.markdown",
+        "data_protection_backup_instance_disk.html.markdown",
+        "data_protection_backup_instance_kubernetes_cluster.html.markdown",
+        "data_protection_backup_instance_mysql_flexible_server.html.markdown",
+        "data_protection_backup_instance_postgresql.html.markdown",
+        "data_protection_backup_instance_postgresql_flexible_server.html.markdown",
+        "data_protection_backup_policy_blob_storage.html.markdown",
+        "data_protection_backup_policy_disk.html.markdown",
+        "data_protection_backup_policy_kubernetes_cluster.html.markdown",
+        "data_protection_backup_policy_mysql_flexible_server.html.markdown",
+        "data_protection_backup_policy_postgresql.html.markdown",
+        "data_protection_backup_policy_postgresql_flexible_server.html.markdown",
+        "data_protection_backup_vault_customer_managed_key.html.markdown",
+        "data_protection_resource_guard.html.markdown",
+        "monitor_diagnostic_setting.html.markdown",
+        "private_endpoint.html.markdown",
+        "role_assignment.html.markdown"
+      ]
+    }
+  },
+  "IoT": {
+    "iotcentral_application": {
+      "core_resource_patterns": ["iotcentral_application.html.markdown"],
+      "associated_resource_patterns": [
+        "iotcentral_application_network_rule_set.html.markdown",
+        "iotcentral_organization.html.markdown",
+        "monitor_diagnostic_setting.html.markdown",
+        "role_assignment.html.markdown"
+      ]
+    },
+    "iothub_dps": {
+      "core_resource_patterns": ["iothub_dps.html.markdown"],
+      "associated_resource_patterns": [
+        "iothub_dps_certificate.html.markdown",
+        "iothub_dps_shared_access_policy.html.markdown",
+        "monitor_diagnostic_setting.html.markdown",
+        "role_assignment.html.markdown"
+      ]
+    },
+    "digital_twins_instance": {
+      "core_resource_patterns": ["digital_twins_instance.html.markdown"],
+      "associated_resource_patterns": [
+        "digital_twins_endpoint_eventgrid.html.markdown",
+        "digital_twins_endpoint_eventhub.html.markdown",
+        "digital_twins_endpoint_servicebus.html.markdown",
+        "digital_twins_time_series_database_connection.html.markdown",
+        "monitor_diagnostic_setting.html.markdown",
+        "private_endpoint.html.markdown",
+        "role_assignment.html.markdown"
+      ]
+    },
+    "iothub_device_update_account": {
+      "core_resource_patterns": ["iothub_device_update_account.html.markdown"],
+      "associated_resource_patterns": [
+        "iothub_device_update_instance.html.markdown",
+        "monitor_diagnostic_setting.html.markdown",
+        "private_endpoint.html.markdown",
+        "role_assignment.html.markdown"
+      ]
+    },
+    "iot_security_solution": {
+      "core_resource_patterns": ["iot_security_solution.html.markdown"],
+      "associated_resource_patterns": [
+        "iot_security_device_group.html.markdown",
+        "monitor_diagnostic_setting.html.markdown",
+        "role_assignment.html.markdown"
+      ]
+    }
+  },
+  "Migration": {
+    "migrate_project": {
+      "core_resource_patterns": ["migrate_project.html.markdown"],
+      "associated_resource_patterns": [
+        "migrate_assessment.html.markdown",
+        "migrate_server_replication.html.markdown",
+        "role_assignment.html.markdown"
+      ]
+    }
+  },
+  "Mixed Reality": {
+    "spatial_anchors_account": {
+      "core_resource_patterns": ["spatial_anchors_account.html.markdown"],
+      "associated_resource_patterns": [
+        "monitor_diagnostic_setting.html.markdown",
+        "role_assignment.html.markdown"
+      ]
+    },
+    "remote_rendering_account": {
+      "core_resource_patterns": ["remote_rendering_account.html.markdown"],
+      "associated_resource_patterns": [
+        "monitor_diagnostic_setting.html.markdown",
+        "role_assignment.html.markdown"
+      ]
+    }
+  },
+  "Spring Cloud": {
+    "spring_cloud_service": {
+      "core_resource_patterns": ["spring_cloud_service.html.markdown"],
+      "associated_resource_patterns": [
+        "monitor_diagnostic_setting.html.markdown",
+        "private_endpoint.html.markdown",
+        "role_assignment.html.markdown",
+        "spring_cloud_accelerator.html.markdown",
+        "spring_cloud_active_deployment.html.markdown",
+        "spring_cloud_api_portal.html.markdown",
+        "spring_cloud_api_portal_custom_domain.html.markdown",
+        "spring_cloud_app.html.markdown",
+        "spring_cloud_app_cosmosdb_association.html.markdown",
+        "spring_cloud_app_dynamics_application_performance_monitoring.html.markdown",
+        "spring_cloud_app_mysql_association.html.markdown",
+        "spring_cloud_app_redis_association.html.markdown",
+        "spring_cloud_application_insights_application_performance_monitoring.html.markdown",
+        "spring_cloud_application_live_view.html.markdown",
+        "spring_cloud_build_deployment.html.markdown",
+        "spring_cloud_build_pack_binding.html.markdown",
+        "spring_cloud_builder.html.markdown",
+        "spring_cloud_certificate.html.markdown",
+        "spring_cloud_configuration_service.html.markdown",
+        "spring_cloud_connection.html.markdown",
+        "spring_cloud_container_deployment.html.markdown",
+        "spring_cloud_custom_domain.html.markdown",
+        "spring_cloud_customized_accelerator.html.markdown",
+        "spring_cloud_dev_tool_portal.html.markdown",
+        "spring_cloud_dynatrace_application_performance_monitoring.html.markdown",
+        "spring_cloud_elastic_application_performance_monitoring.html.markdown",
+        "spring_cloud_gateway.html.markdown",
+        "spring_cloud_gateway_custom_domain.html.markdown",
+        "spring_cloud_gateway_route_config.html.markdown",
+        "spring_cloud_java_deployment.html.markdown",
+        "spring_cloud_new_relic_application_performance_monitoring.html.markdown",
+        "spring_cloud_storage.html.markdown"
+      ]
+    }
+  },
+  "DevOps": {
+    "chaos_studio_experiment": {
+      "core_resource_patterns": ["chaos_studio_experiment.html.markdown"],
+      "associated_resource_patterns": [
+        "chaos_studio_capability.html.markdown",
+        "chaos_studio_target.html.markdown",
+        "monitor_diagnostic_setting.html.markdown",
+        "role_assignment.html.markdown"
+      ]
+    }
+  },
+  "Healthcare": {
+    "healthcare_service": {
+      "core_resource_patterns": ["healthcare_service.html.markdown"],
+      "associated_resource_patterns": [
+        "healthcare_dicom.html.markdown",
+        "healthcare_fhir_service.html.markdown",
+        "healthcare_medtech_service.html.markdown",
+        "healthcare_medtech_service_fhir_destination.html.markdown",
+        "healthcare_workspace.html.markdown",
+        "monitor_diagnostic_setting.html.markdown",
+        "private_endpoint.html.markdown",
+        "role_assignment.html.markdown"
+      ]
+    }
+  },
+  "Space": {
+    "orbital_spacecraft": {
+      "core_resource_patterns": ["orbital_spacecraft.html.markdown"],
+      "associated_resource_patterns": [
+        "monitor_diagnostic_setting.html.markdown",
+        "orbital_contact.html.markdown",
+        "orbital_contact_profile.html.markdown",
+        "role_assignment.html.markdown"
+      ]
+    }
+  },
+  "SAP": {
+    "workloads_sap_discovery_virtual_instance": {
+        "core_resource_patterns": ["workloads_sap_discovery_virtual_instance.html.markdown"],
+        "associated_resource_patterns": [
+            "monitor_diagnostic_setting.html.markdown",
+            "role_assignment.html.markdown"
+        ]
+    },
+    "workloads_sap_single_node_virtual_instance": {
+        "core_resource_patterns": ["workloads_sap_single_node_virtual_instance.html.markdown"],
+        "associated_resource_patterns": [
+            "monitor_diagnostic_setting.html.markdown",
+            "role_assignment.html.markdown"
+        ]
+    },
+    "workloads_sap_three_tier_virtual_instance": {
+        "core_resource_patterns": ["workloads_sap_three_tier_virtual_instance.html.markdown"],
+        "associated_resource_patterns": [
+            "monitor_diagnostic_setting.html.markdown",
+            "role_assignment.html.markdown"
+        ]
+    }
+  }
+}
