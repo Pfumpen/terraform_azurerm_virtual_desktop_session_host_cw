@@ -1,3 +1,7 @@
+Selbstverständlich. Hier ist das vollständige "Azure Terraform Module Code Guidelines"-Dokument, bei dem der Abschnitt zu den Diagnoseeinstellungen durch die neue, flexiblere Version ersetzt wurde.
+
+---
+
 # Azure Terraform Module Code Guidelines (AI-Optimized)
 
 **Purpose of this Document:** These guidelines are specifically structured to assist an AI in generating high-quality, consistent, and maintainable Azure Terraform modules. Adherence to these guidelines is critical. Pay close attention to directives, examples, and structural requirements.
@@ -50,43 +54,114 @@ resource "azurerm_sql_database" "db" {
 ```
 **AI Rationale:** This separation helps you focus on one resource type at a time, reducing errors and improving dependency tracking.
 
-### 1.3 Telemetry and Monitoring (Diagnostic Settings)
+### 1.3 Flexible and User-Friendly Diagnostic Settings
 
-Modules **SHOULD** provide capabilities to configure diagnostic settings for the resources they create.
+Modules **MUST** provide a flexible and user-friendly way to configure diagnostic settings for the resources they create. A static on/off switch is insufficient. Implement a "log level" pattern that offers presets for common use cases.
 
-*   **Input Variables:**
-    *   `enable_telemetry` (bool, default `true`): To toggle diagnostic settings.
-    *   `log_analytics_workspace_id` (string, default `null`): ID of an *existing* Log Analytics Workspace.
-    *   `event_hub_authorization_rule_id` (string, default `null`): ID of an *existing* Event Hub Authorization Rule.
-    *   `storage_account_id` (string, default `null`): ID of an *existing* Storage Account for diagnostics.
-*   **Resource:** `azurerm_monitor_diagnostic_setting`.
-*   **Crucial Constraint:** The module **MUST NOT** create these diagnostic target resources (Log Analytics, Event Hub, Storage Account). It only configures the created primary resource to send diagnostics to them.
+*   **Core Principle:** The module should offer presets like `basic`, `detailed`, and `custom` to simplify configuration, while still allowing full control. The configuration should be driven by a single `diagnostics_level` variable.
+*   **Implementation:** This pattern **MUST** be implemented using a combination of `locals` to define the presets and `dynamic` blocks within the `azurerm_monitor_diagnostic_setting` resource to generate the required `enabled_log` and `metric` blocks.
+
+#### Input Variables for Diagnostics
 
 ```hcl
-variable "enable_telemetry" {
-  type        = bool
-  default     = true
-  description = "Controls whether telemetry (diagnostic settings) for the primary resource is enabled."
+variable "diagnostics_level" {
+  description = "Defines the detail level for diagnostics. Possible values: 'none', 'basic', 'detailed', 'custom'. 'none' disables diagnostics."
+  type        = string
+  default     = "basic"
+  validation {
+    condition     = contains(["none", "basic", "detailed", "custom"], var.diagnostics_level)
+    error_message = "Valid values for diagnostics_level are 'none', 'basic', 'detailed', or 'custom'."
+  }
 }
+
 variable "log_analytics_workspace_id" {
+  description = "Resource ID of the Log Analytics Workspace to send diagnostics to. Required if diagnostics_level is not 'none'."
   type        = string
   default     = null
-  description = "Resource ID of the Log Analytics Workspace to send diagnostics to. Required if enable_telemetry is true."
 }
-// ... other diagnostic target ID variables ...
 
-resource "azurerm_monitor_diagnostic_setting" "primary_resource_diagnostics" {
-  count = var.enable_telemetry && var.log_analytics_workspace_id != null ? 1 : 0
-  
-  name                       = "diag-${var.name}" // Ensure 'var.name' or a similar unique identifier is available
+variable "diagnostics_custom_logs" {
+  description = "A list of log categories to enable when diagnostics_level is 'custom'."
+  type        = list(string)
+  default     = []
+}
+
+variable "diagnostics_custom_metrics" {
+  description = "A list of metric categories to enable when diagnostics_level is 'custom'. Use ['AllMetrics'] for all."
+  type        = list(string)
+  default     = []
+}
+
+// ... other target IDs like event_hub_authorization_rule_id or storage_account_id can be added similarly.
+```
+
+#### Implementation Pattern
+
+**AI, you MUST follow this pattern.** Your primary task is to research and provide the correct log/metric categories for the specific Azure resource being managed.
+
+**CRITICAL: Log and metric categories are unique to each Azure resource type.**
+*   A **Virtual Machine** has categories like `AuditLogs`, `Connection`, `Error`.
+*   A **Storage Account** has different categories like `StorageRead`, `StorageWrite`.
+*   A **Key Vault** has `AuditEvent`.
+*   **You MUST** consult the Azure documentation or use the Azure Portal/CLI to find the valid categories for the target resource and populate the `locals` block accordingly.
+
+**Example for a Virtual Machine (`azurerm_windows_virtual_machine`):**
+
+```hcl
+# main.tf or diagnostics.tf
+
+locals {
+  # AI MUST define these presets with the CORRECT categories for the target resource.
+  # This example is for a Virtual Machine.
+  diagnostics_presets = {
+    basic = {
+      logs    = ["AuditLogs"]
+      metrics = ["AllMetrics"]
+    },
+    detailed = {
+      # These are example categories for a VM, verify them for the specific resource.
+      logs    = ["AuditLogs", "Checkpoint", "Error", "Management", "Connection", "HostRegistration"]
+      metrics = ["AllMetrics"]
+    },
+    custom = {
+      logs    = var.diagnostics_custom_logs
+      metrics = var.diagnostics_custom_metrics
+    }
+  }
+
+  # This logic selects the active categories based on the user's input.
+  active_log_categories    = lookup(local.diagnostics_presets, var.diagnostics_level, { logs = [] }).logs
+  active_metric_categories = lookup(local.diagnostics_presets, var.diagnostics_level, { metrics = [] }).metrics
+}
+
+resource "azurerm_monitor_diagnostic_setting" "main_resource_diagnostics" {
+  # This resource is only created if a valid level and target are provided.
+  count = var.diagnostics_level != "none" && var.log_analytics_workspace_id != null ? 1 : 0
+
+  name                       = "diag-${var.name}" // Use a unique name
   target_resource_id         = /* ID of the primary resource created by the module */
   log_analytics_workspace_id = var.log_analytics_workspace_id
 
-  // Configure desired log categories and metrics
-  enabled_log { category = "AuditLogs" } // Example
-  metric { category = "AllMetrics" }    // Example
+  # Dynamically generate 'enabled_log' blocks based on the selected preset.
+  dynamic "enabled_log" {
+    for_each = toset(local.active_log_categories)
+    content {
+      category = enabled_log.value
+    }
+  }
+
+  # Dynamically generate 'metric' blocks.
+  dynamic "metric" {
+    for_each = toset(local.active_metric_categories)
+    content {
+      category = metric.value
+      enabled  = true
+    }
+  }
 }
 ```
+
+**AI Rationale:** This pattern provides a superior user experience. Users can select a simple, understandable `diagnostics_level` without needing to know the specific, complex category names for each Azure service. The `custom` option preserves full flexibility for advanced users. Your responsibility as the AI is to handle the resource-specific complexity within the module's `locals`.
 
 ## 2. Variable Management
 
