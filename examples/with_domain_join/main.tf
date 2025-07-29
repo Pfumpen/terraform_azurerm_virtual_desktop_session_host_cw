@@ -67,8 +67,10 @@ module "avd_session_host" {
 
   # --- Diagnostic Settings ---
   # Send detailed diagnostics to the Log Analytics Workspace.
-  diagnostics_level          = "detailed"
-  log_analytics_workspace_id = azurerm_log_analytics_workspace.example.id
+  diagnostics_level = "detailed"
+  diagnostic_settings = {
+    log_analytics_workspace_id = azurerm_log_analytics_workspace.example.id
+  }
 
   session_hosts = {
     "host-dj-1" = {

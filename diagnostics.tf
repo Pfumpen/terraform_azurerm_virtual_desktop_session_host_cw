@@ -26,9 +26,11 @@ locals {
 resource "azurerm_monitor_diagnostic_setting" "session_host" {
   for_each = local.global_diagnostics_enabled ? local.filtered_session_hosts : {}
 
-  name                       = "${each.value.name}-diagnostics"
-  target_resource_id         = each.value.id
-  log_analytics_workspace_id = var.log_analytics_workspace_id
+  name                           = "${each.value.name}-diagnostics"
+  target_resource_id             = each.value.id
+  log_analytics_workspace_id     = try(var.diagnostic_settings.log_analytics_workspace_id, null)
+  eventhub_authorization_rule_id = try(var.diagnostic_settings.eventhub_authorization_rule_id, null)
+  storage_account_id             = try(var.diagnostic_settings.storage_account_id, null)
 
   dynamic "enabled_log" {
     for_each = toset(local.active_log_categories)

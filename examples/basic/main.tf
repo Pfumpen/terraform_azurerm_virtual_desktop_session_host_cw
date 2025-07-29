@@ -60,8 +60,10 @@ module "avd_session_host" {
   # Send detailed diagnostics to the Log Analytics Workspace.
   # The module defaults to "basic" if this is not set.
   # Set to "none" to disable.
-  diagnostics_level          = "detailed"
-  log_analytics_workspace_id = azurerm_log_analytics_workspace.example.id
+  diagnostics_level = "detailed"
+  diagnostic_settings = {
+    log_analytics_workspace_id = azurerm_log_analytics_workspace.example.id
+  }
 
   session_hosts = {
     "host1" = {

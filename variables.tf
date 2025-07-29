@@ -120,10 +120,24 @@ variable "diagnostics_level" {
   }
 }
 
-variable "log_analytics_workspace_id" {
-  description = "Resource ID of the Log Analytics Workspace to send diagnostics to. Required if diagnostics_level is not 'none'."
-  type        = string
-  default     = null
+variable "diagnostic_settings" {
+  description = "Configuration for the diagnostic settings. Specifies the destination for logs and metrics."
+  type = object({
+    log_analytics_workspace_id     = optional(string)
+    eventhub_authorization_rule_id = optional(string)
+    storage_account_id             = optional(string)
+  })
+  default  = {}
+  nullable = true
+
+  validation {
+    condition = var.diagnostics_level == "none" || (
+      (try(var.diagnostic_settings.log_analytics_workspace_id, null) != null ? 1 : 0) +
+      (try(var.diagnostic_settings.eventhub_authorization_rule_id, null) != null ? 1 : 0) +
+      (try(var.diagnostic_settings.storage_account_id, null) != null ? 1 : 0) == 1
+    )
+    error_message = "When diagnostics_level is not 'none', exactly one of 'log_analytics_workspace_id', 'eventhub_authorization_rule_id', or 'storage_account_id' must be specified."
+  }
 }
 
 variable "diagnostics_custom_logs" {

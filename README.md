@@ -80,7 +80,7 @@ Alternatively, you can still specify a custom image by providing the full `sourc
 | `domain_join`          | Configuration for joining the session hosts to an Active Directory domain. If not provided (`null`), the step is skipped.              | `object`       | `null`  | no       |
 | `tags`                 | A map of tags to apply to all created resources.                                                                                       | `map(string)`  | `{}`    | no       |
 | `diagnostics_level`    | Defines the detail level for diagnostics. Can be `none`, `basic`, `detailed`, or `custom`. See "Diagnostic Settings" section. | `string`       | `"basic"` | no       |
-| `log_analytics_workspace_id` | Resource ID of the Log Analytics Workspace. Required if `diagnostics_level` is not `none`.                                       | `string`       | `null`  | no       |
+| `diagnostic_settings`  | Configures the destination for diagnostics. Required if `diagnostics_level` is not `none`. See "Diagnostic Settings" section.      | `object`       | `{}`    | no       |
 | `diagnostics_custom_logs` | A list of log categories to enable when `diagnostics_level` is `custom`.                                                         | `list(string)` | `[]`    | no       |
 | `diagnostics_custom_metrics` | A list of metric categories to enable when `diagnostics_level` is `custom`. Use `["AllMetrics"]` for all.                       | `list(string)` | `[]`    | no       |
 | `managed_identity`     | Configuration for the Managed Identity of the virtual machine.                                                                         | `object`       | `{}`    | no       |
@@ -112,15 +112,20 @@ A map of objects, where each object has the following attributes:
 
 ### Diagnostic Settings
 
-This module provides two levels of control for diagnostics:
+This module provides control for diagnostics through a combination of variables.
 
-1.  **Global Control (`diagnostics_level` variable):** This is the master switch.
-    -   `none`: Disables all diagnostic settings for all hosts, regardless of individual settings.
-    -   `basic`: (Default) Enables a minimal set of logs (`AuditLogs`) and all metrics for applicable hosts.
-    -   `detailed`: Enables a comprehensive set of logs for troubleshooting (`AuditLogs`, `Checkpoint`, `Error`, `Management`, `Connection`, `HostRegistration`) and all metrics.
+1.  **`diagnostics_level`**: This is the master switch and defines the verbosity.
+    -   `none`: Disables all diagnostic settings.
+    -   `basic`: (Default) Enables a minimal set of logs (`AuditLogs`) and all metrics.
+    -   `detailed`: Enables a comprehensive set of logs for troubleshooting.
     -   `custom`: Enables only the specific log and metric categories defined in `diagnostics_custom_logs` and `diagnostics_custom_metrics`.
 
-2.  **Per-Host Control (`diagnostics_enabled` attribute):** Inside the `session_hosts` map, you can set `diagnostics_enabled = false` for any host you wish to exclude from logging. By default, diagnostics are enabled (`true`) for all hosts if not specified. This allows you to keep global diagnostics active while selectively disabling them for specific VMs.
+2.  **`diagnostic_settings`**: If `diagnostics_level` is not `none`, this object specifies the destination for the diagnostics. **Exactly one** of the following attributes must be provided:
+    -   `log_analytics_workspace_id` (string): The resource ID of a Log Analytics Workspace.
+    -   `eventhub_authorization_rule_id` (string): The resource ID of an Event Hubs authorization rule.
+    -   `storage_account_id` (string): The resource ID of a Storage Account.
+
+3.  **`diagnostics_enabled` (Per-Host Control)**: Inside the `session_hosts` map, you can set `diagnostics_enabled = false` for any host you wish to exclude from logging. By default, it's `true`.
 
 ### `password_generation_config` variable structure
 
@@ -169,8 +174,10 @@ module "avd_session_host" {
 
   # --- Diagnostic Settings Example ---
   # Send detailed diagnostics to a Log Analytics Workspace
-  diagnostics_level          = "detailed"
-  log_analytics_workspace_id = azurerm_log_analytics_workspace.example.id
+  diagnostics_level = "detailed"
+  diagnostic_settings = {
+    log_analytics_workspace_id = azurerm_log_analytics_workspace.example.id
+  }
   # -----------------------------------
 
   session_hosts = {
