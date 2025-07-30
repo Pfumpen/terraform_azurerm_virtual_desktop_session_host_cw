@@ -40,9 +40,9 @@ Alternatively, you can still specify a custom image by providing the full `sourc
 
 | Name      | Version |
 |-----------|---------|
-| terraform | >= 1.0.0 |
-| azurerm   | >= 3.0.0 |
-| random    | >= 3.0.0 |
+| terraform | >= 1.11.0 |
+| azurerm   | >= 4.31.0 |
+| random    | >= 3.1.0  |
 
 ## External Dependencies
 

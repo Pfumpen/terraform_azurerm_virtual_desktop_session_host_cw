@@ -39,11 +39,10 @@ resource "azurerm_monitor_diagnostic_setting" "session_host" {
     }
   }
 
-  dynamic "metric" {
+  dynamic "enabled_metric" {
     for_each = toset(local.active_metric_categories)
     content {
       category = metric.value
-      enabled  = true
     }
   }
 }
