@@ -106,10 +106,13 @@ module "avd_session_host" {
     }
   }
 
-  domain_join = {
+  join_type = "ad_join"
+
+  domain_join_config = {
     name                         = "yourdomain.com" # Replace with your domain name
     user                         = "yourdomain\\joinuser" # Replace with your domain join user
     password_key_vault_secret_id = azurerm_key_vault_secret.domain_password.id
+    ou_path                      = "OU=AVD,DC=yourdomain,DC=com" # Optional: Replace with your OU path
   }
 
   tags = {

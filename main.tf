@@ -5,17 +5,6 @@ locals {
       "provisioner"   = "Terraform"
     }
   )
-
-  # Parse secret IDs to extract Key Vault ID and secret name.
-  # This will always fetch the latest version of the secret.
-  domain_join_secret_parts = var.domain_join != null ? regex("(.*/vaults/[^/]+)/secrets/([^/]+)", var.domain_join.password_key_vault_secret_id) : null
-}
-
-data "azurerm_key_vault_secret" "domain_join_password" {
-  count = var.domain_join != null ? 1 : 0
-
-  name         = local.domain_join_secret_parts[1]
-  key_vault_id = local.domain_join_secret_parts[0]
 }
 
 resource "random_password" "admin_password" {
@@ -34,7 +23,6 @@ resource "azurerm_key_vault_secret" "admin_password" {
   key_vault_id = var.admin_password_key_vault_id
   tags         = local.merged_tags
 
-  depends_on = [azurerm_windows_virtual_machine.session_host]
 }
 
 resource "azurerm_windows_virtual_machine" "session_host" {
@@ -69,8 +57,12 @@ resource "azurerm_windows_virtual_machine" "session_host" {
 
   dynamic "identity" {
     for_each = var.managed_identity.system_assigned || length(var.managed_identity.user_assigned_resource_ids) > 0 ? [1] : []
+
     content {
-      type         = var.managed_identity.system_assigned ? "SystemAssigned" : "UserAssigned"
+      type = (var.managed_identity.system_assigned && length(var.managed_identity.user_assigned_resource_ids) > 0) ? "SystemAssigned, UserAssigned" : (
+        var.managed_identity.system_assigned ? "SystemAssigned" : "UserAssigned"
+      )
+      
       identity_ids = var.managed_identity.user_assigned_resource_ids
     }
   }

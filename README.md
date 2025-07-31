@@ -8,6 +8,8 @@ This Terraform module provisions and configures one or more Windows Virtual Mach
 -   Configures network interfaces with static or dynamic IP allocation.
 -   **Securely generates** a random administrator password for each session host and stores it in a specified Azure Key Vault.
 -   **Optionally** performs Active Directory domain join using the `JsonADDomainExtension`.
+-   Supports multiple identity join types: Active Directory, Microsoft Entra ID, Hybrid Entra, and Microsoft Entra DS.
+-   **Optionally installs and configures FSLogix** for robust user profile management.
 -   Installs the AVD agent and bootloader via a PowerShell DSC extension, registering the host with a specified AVD Host Pool.
 -   Supports standard Azure VM features: specific VM sizes, OS disk configurations, and custom/Marketplace images.
 -   Integrates with Availability Zones for high availability.
@@ -51,6 +53,7 @@ Alternatively, you can still specify a custom image by providing the full `sourc
 -   **Active Directory Domain (Optional):** If performing a domain join, the Subnet must have network connectivity to an Active Directory domain controller.
 -   **AVD Host Pool:** An existing AVD Host Pool is required to generate the `avd_registration_token` and to provide the `host_pool_name`.
 -   **Azure Key Vault:** An Azure Key Vault is required. It is used to store the generated administrator passwords and, if applicable, to retrieve the domain join password.
+-   **FSLogix Profile Share (Optional):** If using `fslogix_config`, you must have an SMB file share (e.g., Azure Files Premium) accessible from the session hosts.
 
 ## Resources Created
 
@@ -60,8 +63,10 @@ Alternatively, you can still specify a custom image by providing the full `sourc
 | `azurerm_network_interface`           | `session_host` (for_each) |
 | `random_password`                     | `admin_password` (for_each) |
 | `azurerm_key_vault_secret`            | `admin_password` (for_each) |
-| `azurerm_virtual_machine_extension`   | `domain_join` (for_each, optional)  |
-| `azurerm_virtual_machine_extension`   | `avd_agent` (for_each)    |
+| `azurerm_virtual_machine_extension`   | `domain_join` | `for_each` (if join type is AD-based) |
+| `azurerm_virtual_machine_extension`   | `entra_id_join` | `for_each` (if join type is Entra) |
+| `azurerm_virtual_machine_extension`   | `fslogix_setup`    | `fslogix_config` is set (for_each)     |
+| `azurerm_virtual_machine_extension`   | `avd_agent` | `for_each` |
 | `azurerm_monitor_diagnostic_setting`  | `session_host` (for_each, optional) |
 | `azurerm_role_assignment`             | `session_host` (for_each, optional) |
 | `data.azurerm_key_vault_secret`       | `domain_join_password` (optional) |
@@ -77,7 +82,9 @@ Alternatively, you can still specify a custom image by providing the full `sourc
 | `avd_registration_token`| The registration token from the AVD Host Pool.                                                                                         | `sensitive(string)` | n/a     | yes      |
 | `admin_password_key_vault_id` | The resource ID of the Azure Key Vault where the generated admin passwords for the session hosts will be stored as secrets.        | `string`       | n/a     | yes      |
 | `password_generation_config` | Configuration for generating random passwords for the session host administrators.                                                 | `object`       | `{}`    | no       |
-| `domain_join`          | Configuration for joining the session hosts to an Active Directory domain. If not provided (`null`), the step is skipped.              | `object`       | `null`  | no       |
+| `join_type` | Defines the identity join type for the session host VMs. Valid options: 'ad_join', 'hybrid_entra_join', 'aadds_join', 'entra_join', 'none'. | `string` | `"none"` | no |
+| `domain_join_config` | Configuration object for joining an AD or AADDS domain. See structure below. | `object` | `null` | yes, if `join_type` is AD-based |
+| `fslogix_config` | If provided, installs and configures FSLogix for profile management. If `null`, this step is skipped. | `object` | `null` | no |
 | `tags`                 | A map of tags to apply to all created resources.                                                                                       | `map(string)`  | `{}`    | no       |
 | `diagnostics_level`    | Defines the detail level for diagnostics. Can be `none`, `basic`, `detailed`, or `custom`. See "Diagnostic Settings" section. | `string`       | `"basic"` | no       |
 | `diagnostic_settings`  | Configures the destination for diagnostics. Required if `diagnostics_level` is not `none`. See "Diagnostic Settings" section.      | `object`       | `{}`    | no       |
@@ -133,13 +140,52 @@ This module provides control for diagnostics through a combination of variables.
 -   `special` (bool, optional): Whether to include special characters. Defaults to `true`.
 -   `override_special` (string, optional): A string of special characters to use. Defaults to `!@#$%^&*()-_=+[]{}<>:?`.
 
-### `domain_join` variable structure
+### `domain_join_config` variable structure
+Required only when `join_type` is one of `ad_join`, `hybrid_entra_join`, or `aadds_join`.
+- `name` (string, required): The FQDN of the domain to join (e.g., `corp.contoso.com`).
+- `user` (string, required): The UPN of the user with permissions to join the domain (e.g., `join-user@corp.contoso.com`).
+- `password_key_vault_secret_id` (string, required): The full ID of the Key Vault secret containing the user's password.
+- `ou_path` (string, optional): The distinguished name of the OU to place the computer object in.
 
-If provided, this object enables the Active Directory domain join. It has the following attributes:
+**Type:** `object({ name = string, user = string, password_key_vault_secret_id = string, ou_path = optional(string) })`
 
--   `name` (string, required): The FQDN of the domain to join (e.g., "corp.contoso.com").
--   `user` (string, required): The UPN of the user for the domain join.
--   `password_key_vault_secret_id` (sensitive(string), required): The Key Vault secret ID for the domain join password.
+**Example:**
+```hcl
+domain_join_config = {
+  name                         = "corp.contoso.com"
+  user                         = "corp\\join-account"
+  password_key_vault_secret_id = "your_key_vault_secret_id"
+  ou_path                      = "OU=AVD,OU=Computers,DC=corp,DC=contoso,DC=com"
+}
+```
+
+---
+
+### FSLogix Configuration
+
+To enable FSLogix, provide the `fslogix_config` object. The module will then automatically download, install, and configure the FSLogix agent on each session host.
+
+#### `fslogix_config` variable structure
+
+-   `vhd_locations` (list(string), required): A list of UNC paths to the SMB file shares where profiles will be stored. Example: `["\\\\storageaccount.file.core.windows.net\\profiles"]`.
+-   `volume_type` (string, optional): The disk format for profile containers. Can be "VHD" or "VHDX". Defaults to `"VHDX"`.
+-   `size_in_mbs` (number, optional): The default maximum size of the profile disk in megabytes. Defaults to `30000` (30 GB).
+-   `delete_local_profile_when_vhd_should_apply` (bool, optional): If `true`, any existing local Windows profile for a user will be deleted when they first sign in with an FSLogix profile. Defaults to `true`.
+-   `flip_flop_profile_directory_name` (bool, optional): If `true`, uses a format for the profile folder that swaps the username and SID, which can help with certain file path length issues. Defaults to `true`.
+
+**Example Usage:**
+```hcl
+module "session_hosts" {
+  source = "./modules/avd-session-host"
+
+  # ... other required variables ...
+  
+  fslogix_config = {
+    vhd_locations = ["\\\\your-storage-account.file.core.windows.net\\profiles"]
+    size_in_mbs   = 50000 # 50 GB profiles
+  }
+}
+```
 
 ## Outputs
 
@@ -151,108 +197,9 @@ If provided, this object enables the Active Directory domain join. It has the fo
 
 ## Usage Examples
 
-Working examples can be found in the `examples/` directory.
+Working examples for various join types can be found in the `examples/` directory.
 
--   **`examples/basic`**: Demonstrates how to provision a session host **without** an Active Directory domain join.
--   **`examples/with_domain_join`**: Demonstrates how to provision a session host **with** an Active Directory domain join.
-
-### Basic Example (No Domain Join)
-
-```hcl
-# In examples/basic/main.tf
-
-module "avd_session_host" {
-  source = "../../"
-
-  resource_group_name    = azurerm_resource_group.example.name
-  location               = azurerm_resource_group.example.location
-  avd_registration_token = "your-fake-token"
-  host_pool_name         = "hp-avd-example"
-
-  # Provide the Key Vault ID to store the generated passwords
-  admin_password_key_vault_id = azurerm_key_vault.example.id
-
-  # --- Diagnostic Settings Example ---
-  # Send detailed diagnostics to a Log Analytics Workspace
-  diagnostics_level = "detailed"
-  diagnostic_settings = {
-    log_analytics_workspace_id = azurerm_log_analytics_workspace.example.id
-  }
-  # -----------------------------------
-
-  session_hosts = {
-    "host1" = {
-      name           = "avd-sh-host1"
-      size           = "Standard_D2s_v3"
-      admin_username = "localadmin"
-      # Diagnostics for this host will be enabled based on the global setting.
-      network_interface = {
-        name                          = "nic-host1"
-        subnet_id                     = azurerm_subnet.example.id
-        private_ip_address_allocation = "Dynamic"
-      }
-      os_disk = {
-        caching              = "ReadWrite"
-        storage_account_type = "Standard_LRS"
-      }
-      image_key = "win11-23H2-ms-m365"
-    },
-    "host2-no-diag" = {
-      name                = "avd-sh-host2"
-      size                = "Standard_D2s_v3"
-      admin_username      = "localadmin"
-      diagnostics_enabled = false # Explicitly disable diagnostics for this host.
-      network_interface = {
-        name                          = "nic-host2"
-        subnet_id                     = azurerm_subnet.example.id
-        private_ip_address_allocation = "Dynamic"
-      }
-      os_disk = {
-        caching              = "ReadWrite"
-        storage_account_type = "Standard_LRS"
-      }
-      image_key = "win11-23H2-ms-m365"
-    }
-  }
-}
-```
-
-### With Domain Join Example
-
-```hcl
-# In examples/with_domain_join/main.tf
-
-module "avd_session_host" {
-  source = "../../"
-
-  resource_group_name    = azurerm_resource_group.example.name
-  location               = azurerm_resource_group.example.location
-  avd_registration_token = "your-fake-token"
-  host_pool_name         = "hp-avd-domain-join-example"
-
-  admin_password_key_vault_id = azurerm_key_vault.example.id
-
-  domain_join = {
-    name                         = "yourdomain.com"
-    user                         = "yourdomain\\joinuser"
-    password_key_vault_secret_id = azurerm_key_vault_secret.domain_password.id
-  }
-
-  session_hosts = {
-    "host-dj-1" = {
-      name           = "avd-dj-host-1"
-      size           = "Standard_D4s_v3"
-      admin_username = "localadmin"
-      network_interface = {
-        name                          = "nic-host-dj-1"
-        subnet_id                     = azurerm_subnet.example.id
-        private_ip_address_allocation = "Dynamic"
-      }
-      os_disk = {
-        caching              = "ReadWrite"
-        storage_account_type = "Premium_LRS"
-      }
-      image_key = "win11-23H2-ms-m365"
-    }
-  }
-}
+-   **`examples/basic`**: Demonstrates provisioning a session host with no domain join (`join_type = "none"`).
+-   **`examples/ad_join`**: Demonstrates a traditional Active Directory domain join (`join_type = "ad_join"`).
+-   **`examples/entra_join`**: Demonstrates a cloud-native Microsoft Entra ID join (`join_type = "entra_join"`).
+-   **`examples/hybrid_entra_join`**: Demonstrates a Hybrid Microsoft Entra join (`join_type = "hybrid_entra_join"`).

@@ -2,11 +2,11 @@
 locals {
   diagnostics_presets = {
     basic = {
-      logs    = ["AuditLogs"]
+      logs    = []
       metrics = ["AllMetrics"]
     },
     detailed = {
-      logs    = ["AuditLogs", "Checkpoint", "Error", "Management", "Connection", "HostRegistration"]
+      logs    = ["SoftwareUpdateProfile", "SoftwareUpdates"]
       metrics = ["AllMetrics"]
     },
     custom = {
@@ -42,7 +42,7 @@ resource "azurerm_monitor_diagnostic_setting" "session_host" {
   dynamic "enabled_metric" {
     for_each = toset(local.active_metric_categories)
     content {
-      category = metric.value
+      category = enabled_metric.value
     }
   }
 }

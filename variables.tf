@@ -76,15 +76,58 @@ variable "host_pool_name" {
   nullable    = false
 }
 
-variable "domain_join" {
-  description = "Configuration for joining the session hosts to an Active Directory domain. If not provided, the session hosts will not be joined to a domain."
+variable "join_type" {
+  description = "Defines the identity join type for the session host VMs. Valid options: 'ad_join' (Active Directory), 'hybrid_entra_join' (Hybrid Microsoft Entra), 'aadds_join' (Microsoft Entra Domain Services), 'entra_join' (Microsoft Entra ID), 'none'."
+  type        = string
+  default     = "none"
+  nullable    = false
+
+  validation {
+    condition     = contains(["ad_join", "hybrid_entra_join", "aadds_join", "entra_join", "none"], var.join_type)
+    error_message = "Valid values for join_type are 'ad_join', 'hybrid_entra_join', 'aadds_join', 'entra_join', or 'none'."
+  }
+}
+
+variable "domain_join_config" {
+  description = "Configuration object for joining an Active Directory or Microsoft Entra Domain Services domain. Required only when join_type is 'ad_join', 'hybrid_entra_join', or 'aadds_join'."
   type = object({
     name                         = string
     user                         = string
     password_key_vault_secret_id = string
+    ou_path                      = optional(string)
   })
   default  = null
   nullable = true
+
+  validation {
+    condition = !(contains(["ad_join", "hybrid_entra_join", "aadds_join"], var.join_type)) || (
+      var.domain_join_config != null
+    )
+    error_message = "The 'domain_join_config' object must be provided when 'join_type' is set to 'ad_join', 'hybrid_entra_join', or 'aadds_join'."
+  }
+}
+
+variable "fslogix_config" {
+  description = "If provided, installs and configures FSLogix for profile management. If left as null, this step is skipped."
+  type = object({
+    vhd_locations = list(string)
+    volume_type   = optional(string, "VHDX")
+    size_in_mbs   = optional(number, 30000)
+    delete_local_profile_when_vhd_should_apply = optional(bool, true)
+    flip_flop_profile_directory_name           = optional(bool, true)
+  })
+  default  = null
+  nullable = true
+
+  validation {
+    condition     = var.fslogix_config == null || length(var.fslogix_config.vhd_locations) > 0
+    error_message = "When 'fslogix_config' is provided, the 'vhd_locations' list must not be empty."
+  }
+
+  validation {
+    condition     = var.fslogix_config == null || contains(["VHD", "VHDX"], var.fslogix_config.volume_type)
+    error_message = "The 'volume_type' attribute in 'fslogix_config' must be either 'VHD' or 'VHDX'."
+  }
 }
 
 variable "admin_password_key_vault_id" {
@@ -113,7 +156,7 @@ variable "tags" {
 variable "diagnostics_level" {
   description = "Defines the detail level for diagnostics. Possible values: 'none', 'basic', 'detailed', 'custom'. 'none' disables diagnostics."
   type        = string
-  default     = "basic"
+  default     = "none"
   validation {
     condition     = contains(["none", "basic", "detailed", "custom"], var.diagnostics_level)
     error_message = "Valid values for diagnostics_level are 'none', 'basic', 'detailed', or 'custom'."
@@ -162,8 +205,15 @@ variable "managed_identity" {
   nullable = false
 
   validation {
-    condition     = !(var.managed_identity.system_assigned && length(var.managed_identity.user_assigned_resource_ids) > 0)
-    error_message = "A virtual machine can have either a System Assigned identity or User Assigned identities, but not both."
+    condition     = !(var.join_type == "entra_join") || (var.managed_identity.system_assigned == true)
+    error_message = "If 'join_type' is set to 'entra_join', 'managed_identity.system_assigned' MUST be set to 'true'."
+  }
+
+  validation {
+    condition = var.managed_identity.system_assigned || length(var.managed_identity.user_assigned_resource_ids) > 0 || (
+      !var.managed_identity.system_assigned && length(var.managed_identity.user_assigned_resource_ids) == 0
+    )
+    error_message = "When the 'managed_identity' object is configured, either 'system_assigned' must be 'true' or the 'user_assigned_resource_ids' list must contain at least one ID."
   }
 }
 

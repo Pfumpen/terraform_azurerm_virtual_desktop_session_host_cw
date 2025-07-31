@@ -1,34 +1,34 @@
 locals {
   avd_images = {
-    // --- EMPFEHLUNG: Windows 11 Multi-Session (aktuellste Version) ---
+    // --- RECOMMENDATION: Windows 11 Multi-Session (latest version) ---
     "win11-23H2-ms-m365" = {
       publisher = "MicrosoftWindowsDesktop"
       offer     = "office-365"
-      sku       = "win11-23h2-avd-m365" // Multi-session mit vorinstallierten Microsoft 365 Apps
+      sku       = "win11-23h2-avd-m365" // Multi-session with pre-installed Microsoft 365 Apps
       version   = "latest"
     },
     "win11-23H2-ms" = {
       publisher = "MicrosoftWindowsDesktop"
       offer     = "windows-11"
-      sku       = "win11-23h2-avd" // Multi-session ohne Microsoft 365 Apps
+      sku       = "win11-23h2-avd" // Multi-session without Microsoft 365 Apps
       version   = "latest"
     },
 
-    // --- Windows 10 Multi-Session (bewährt und stabil) ---
+    // --- Windows 10 Multi-Session (proven and stable) ---
     "win10-22H2-ms-m365" = {
       publisher = "MicrosoftWindowsDesktop"
       offer     = "office-365"
-      sku       = "win10-22h2-avd-m365" // Multi-session mit vorinstallierten Microsoft 365 Apps
+      sku       = "win10-22h2-avd-m365" // Multi-session with pre-installed Microsoft 365 Apps
       version   = "latest"
     },
     "win10-22H2-ms" = {
       publisher = "MicrosoftWindowsDesktop"
       offer     = "windows-10"
-      sku       = "win10-22h2-avd" // Multi-session ohne Microsoft 365 Apps
+      sku       = "win10-22h2-avd" // Multi-session without Microsoft 365 Apps
       version   = "latest"
     },
 
-    // --- Windows Server (falls benötigt) ---
+    // --- Windows Server (if required) ---
     "win2022-datacenter-g2" = {
       publisher = "MicrosoftWindowsServer"
       offer     = "WindowsServer"
@@ -38,7 +38,7 @@ locals {
     "win2022-datacenter-azure-edition" = {
       publisher = "MicrosoftWindowsServer"
       offer     = "WindowsServer"
-      sku       = "2022-datacenter-azure-edition" // Optimiert für Azure, mit Features wie Hotpatching
+      sku       = "2022-datacenter-azure-edition" // Optimized for Azure, with features like Hotpatching
       version   = "latest"
     },
     "win2019-datacenter-g2" = {
