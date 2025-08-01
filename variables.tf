@@ -49,6 +49,18 @@ variable "session_hosts" {
     ])
     error_message = "The specified 'image_key' does not exist in the available AVD images map. Please refer to the module's README for a list of valid keys."
   }
+
+  validation {
+    condition = alltrue([
+      for k, v in var.session_hosts :
+      length(v.name) >= 1 &&
+      length(v.name) <= 15 &&
+      !can(regex("[<>*\\\\/\\?]", v.name)) &&
+      substr(v.name, length(v.name) - 1, 1) != "." &&
+      !can(regex("^[0-9]+$", v.name))
+    ])
+    error_message = "Invalid session host name. The name must be 1-15 characters long, cannot contain <>*\\\\/? characters, cannot end with a period, and cannot be purely numeric."
+  }
 }
 
 variable "resource_group_name" {

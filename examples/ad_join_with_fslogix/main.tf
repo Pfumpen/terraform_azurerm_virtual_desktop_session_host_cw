@@ -75,7 +75,7 @@ module "avd_session_host" {
 
   session_hosts = {
     "host-fslogix-1" = {
-      name           = "avd-fslogixhost"
+      name           = "avd-fslogixhost1"
       size           = "Standard_D4s_v3"
       admin_username = "localadmin"
       network_interface = {

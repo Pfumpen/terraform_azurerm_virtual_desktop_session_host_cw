@@ -49,9 +49,8 @@ resource "azurerm_virtual_machine_extension" "entra_id_join" {
   tags                       = local.merged_tags
 }
 
-# Conditional resource for FSLogix Installation and Configuration
 resource "azurerm_virtual_machine_extension" "fslogix_setup" {
-  # This resource is only created if fslogix_config is provided by the user.
+  # Will only be created if an FSLogix configuration is provided
   for_each = var.fslogix_config != null ? var.session_hosts : {}
 
   name                 = "${each.value.name}-fslogix-setup"
@@ -59,60 +58,90 @@ resource "azurerm_virtual_machine_extension" "fslogix_setup" {
   publisher            = "Microsoft.Compute"
   type                 = "CustomScriptExtension"
   type_handler_version = "1.10"
-  tags                 = local.merged_tags
+  
+  auto_upgrade_minor_version = true
 
-  # This ensures FSLogix is installed AFTER the machine has joined a domain.
+  tags = local.merged_tags
+
   depends_on = [
     azurerm_virtual_machine_extension.domain_join,
     azurerm_virtual_machine_extension.entra_id_join
   ]
 
-  # The script downloads, installs, and configures FSLogix via registry keys.
   protected_settings = jsonencode({
     "commandToExecute" = <<EOF
 powershell -ExecutionPolicy Unrestricted -Command "
-  Start-Transcript -Path C:\fslogix_install.log
+  # === Robust Error Handling and Logging ===
+  Start-Transcript -Path 'C:\fslogix_setup.log' -Force
 
-  # Variables from Terraform
-  $vhdLocations = '${join("','", var.fslogix_config.vhd_locations)}' -split ','
-  $volumeType = '${var.fslogix_config.volume_type}'
-  $sizeInMBs = ${var.fslogix_config.size_in_mbs}
-  $deleteLocalProfile = $(${var.fslogix_config.delete_local_profile_when_vhd_should_apply})
-  $flipFlopName = $(${var.fslogix_config.flip_flop_profile_directory_name})
+  try {
+    # === 1. Check for existing installation and run only if needed ===
+    $fslogixExePath = 'C:\Program Files\FSLogix\Apps\frxsvc.exe'
+    if (-not (Test-Path $fslogixExePath)) {
+        Write-Host 'FSLogix not found. Starting download and installation...'
+        $fslogixDownloadUrl = 'https://download.microsoft.com/download/a/3/6/a36519b7-1f50-4853-8557-550b05307a58/FSLogix_Apps_2.9.8784.63912.zip'
+        $fslogixZipPath = 'C:\fslogix.zip'
+        
+        # Removed -UseBasicParsing for better forward compatibility and cleaner logs
+        Invoke-WebRequest -Uri $fslogixDownloadUrl -OutFile $fslogixZipPath
+        
+        $fslogixExtractPath = 'C:\fslogix_extracted'
+        Expand-Archive -Path $fslogixZipPath -DestinationPath $fslogixExtractPath -Force
+        $installerPath = Join-Path $fslogixExtractPath 'x64\Release\FSLogixAppsSetup.exe'
+        Start-Process -FilePath $installerPath -ArgumentList '/install /quiet' -Wait
+        
+        Write-Host 'FSLogix installation complete. Cleaning up...'
+        Remove-Item -Path $fslogixZipPath -Force -ErrorAction SilentlyContinue
+        Remove-Item -Path $fslogixExtractPath -Recurse -Force -ErrorAction SilentlyContinue
+    } else {
+        Write-Host 'FSLogix is already installed. Skipping installation.'
+    }
 
-  # Download FSLogix
-  $fslogixZipPath = 'C:\fslogix.zip'
-  $fslogixDownloadUrl = 'https://aka.ms/fslogix_download'
-  Invoke-WebRequest -Uri $fslogixDownloadUrl -OutFile $fslogixZipPath
-  
-  # Extract and Install
-  $fslogixExtractPath = 'C:\fslogix_extracted'
-  Expand-Archive -Path $fslogixZipPath -DestinationPath $fslogixExtractPath
-  $installerPath = Join-Path $fslogixExtractPath 'x64\Release\FSLogixAppsSetup.exe'
-  Start-Process -FilePath $installerPath -ArgumentList '/install /quiet' -Wait
+    # === 2. Configuration (always runs) ===
+    Write-Host 'Applying FSLogix registry configuration...'
 
-  # Configure FSLogix Registry Keys
-  $regPath = 'HKLM:\SOFTWARE\FSLogix\Profiles'
-  New-Item -Path $regPath -Force | Out-Null
-  
-  New-ItemProperty -Path $regPath -Name 'Enabled' -Value 1 -PropertyType 'DWord' -Force | Out-Null
-  New-ItemProperty -Path $regPath -Name 'VHDLocations' -Value $vhdLocations -PropertyType 'MultiString' -Force | Out-Null
-  New-ItemProperty -Path $regPath -Name 'VolumeType' -Value $volumeType -PropertyType 'String' -Force | Out-Null
-  New-ItemProperty -Path $regPath -Name 'SizeInMBs' -Value $sizeInMBs -PropertyType 'DWord' -Force | Out-Null
-  New-ItemProperty -Path $regPath -Name 'DeleteLocalProfileWhenVHDShouldApply' -Value ($deleteLocalProfile ? 1 : 0) -PropertyType 'DWord' -Force | Out-Null
-  New-ItemProperty -Path $regPath -Name 'FlipFlopProfileDirectoryName' -Value ($flipFlopName ? 1 : 0) -PropertyType 'DWord' -Force | Out-Null
+    # --- Safely handle variables from Terraform, providing defaults for nulls ---
+    
+    # REG_MULTI_SZ: Robustly splits and cleans the array
+    $vhdLocationsArray = '${join(",", var.fslogix_config.vhd_locations)}'.Split(',') | ForEach-Object { $_.Trim() } | Where-Object { -not [string]::IsNullOrWhiteSpace($_) }
 
-  # Clean up
-  Remove-Item -Path $fslogixZipPath -Force
-  Remove-Item -Path $fslogixExtractPath -Recurse -Force
+    # BOOL to DWORD: Safely handles null values by comparing to the string 'true'
+    $deleteLocalProfileDword = if ('${try(var.fslogix_config.delete_local_profile_when_vhd_should_apply, "false")}' -eq 'true') { 1 } else { 0 }
+    $flipFlopNameDword = if ('${try(var.fslogix_config.flip_flop_profile_directory_name, "false")}' -eq 'true') { 1 } else { 0 }
 
-  Stop-Transcript
+    # DWORD: Use try() to provide a default value if the variable is null
+    $sizeInMbs = [int]'${try(var.fslogix_config.size_in_mbs, 30000)}'
+    
+    # VolumeType to DWORD: Use try() for a default and correctly map VHD/VHDX to 1/2
+    $volumeTypeDword = if ('${try(var.fslogix_config.volume_type, "VHDX")}' -eq 'VHDX') { 2 } else { 1 }
+
+    # --- Set Registry Keys ---
+    $regPath = 'HKLM:\SOFTWARE\FSLogix\Profiles'
+    if (-not (Test-Path $regPath)) {
+        New-Item -Path $regPath -Force | Out-Null
+    }
+    
+    New-ItemProperty -Path $regPath -Name 'Enabled' -Value 1 -PropertyType DWord -Force
+    New-ItemProperty -Path $regPath -Name 'VHDLocations' -Value $vhdLocationsArray -PropertyType MultiString -Force
+    New-ItemProperty -Path $regPath -Name 'VolumeType' -Value $volumeTypeDword -PropertyType DWord -Force
+    New-ItemProperty -Path $regPath -Name 'SizeInMBs' -Value $sizeInMbs -PropertyType DWord -Force
+    New-ItemProperty -Path $regPath -Name 'DeleteLocalProfileWhenVHDShouldApply' -Value $deleteLocalProfileDword -PropertyType DWord -Force
+    New-ItemProperty -Path $regPath -Name 'FlipFlopProfileDirectoryName' -Value $flipFlopNameDword -PropertyType DWord -Force
+
+    Write-Host 'FSLogix configuration applied successfully.'
+
+  } catch {
+      Write-Error "An error occurred during FSLogix setup: $_"
+      exit 1
+  } finally {
+      Stop-Transcript
+  }
 "
 EOF
   })
 
   timeouts {
-    create = "30m"
+    create = "1h"
     delete = "15m"
   }
 }
