@@ -56,6 +56,14 @@ resource "azurerm_storage_share" "example" {
   quota                = 100 # in GB
 }
 
+resource "azurerm_log_analytics_workspace" "example" {
+  name                = "log-avd-sh-fslogix-example"
+  location            = azurerm_resource_group.example.location
+  resource_group_name = azurerm_resource_group.example.name
+  sku                 = "PerGB2018"
+  retention_in_days   = 30
+}
+
 # Placeholder for the AVD registration token
 variable "avd_registration_token" {
   description = "Placeholder for AVD registration token."
@@ -73,11 +81,18 @@ module "avd_session_host" {
 
   admin_password_key_vault_id = azurerm_key_vault.example.id
 
+  # --- Diagnostic Settings ---
+  diagnostics_level = "all"
+  diagnostic_settings = {
+    log_analytics_workspace_id = azurerm_log_analytics_workspace.example.id
+  }
+
   session_hosts = {
     "host-fslogix-1" = {
-      name           = "avd-fslogixhost1"
-      size           = "Standard_D4s_v3"
-      admin_username = "localadmin"
+      name                = "avd-fslogixhost"
+      size                = "Standard_D4s_v3"
+      admin_username      = "localadmin"
+      diagnostics_enabled = true
       network_interface = {
         name                          = "nic-host-fslogix-1"
         subnet_id                     = azurerm_subnet.example.id

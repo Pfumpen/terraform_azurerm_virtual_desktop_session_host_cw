@@ -66,16 +66,17 @@ module "avd_session_host" {
   admin_password_key_vault_id = azurerm_key_vault.example.id
 
   # --- Diagnostic Settings ---
-  diagnostics_level = "detailed"
+  diagnostics_level = "all"
   diagnostic_settings = {
     log_analytics_workspace_id = azurerm_log_analytics_workspace.example.id
   }
 
   session_hosts = {
     "host-hybrid-1" = {
-      name           = "avd-hybrid-host"
-      size           = "Standard_D4s_v3"
-      admin_username = "localadmin"
+      name                = "avd-hybrid-host"
+      size                = "Standard_D4s_v3"
+      admin_username      = "localadmin"
+      diagnostics_enabled = true
       network_interface = {
         name                          = "nic-hybrid-host-1"
         subnet_id                     = azurerm_subnet.example.id

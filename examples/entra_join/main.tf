@@ -30,6 +30,14 @@ resource "azurerm_subnet" "example" {
   address_prefixes     = ["10.2.1.0/24"]
 }
 
+resource "azurerm_log_analytics_workspace" "example" {
+  name                = "log-avd-sh-entra-example"
+  location            = azurerm_resource_group.example.location
+  resource_group_name = azurerm_resource_group.example.name
+  sku                 = "PerGB2018"
+  retention_in_days   = 30
+}
+
 # Placeholder for the AVD registration token
 variable "avd_registration_token" {
   description = "Placeholder for AVD registration token."
@@ -56,11 +64,18 @@ module "avd_session_host" {
   }
   # --------------------------
 
+  # --- Diagnostic Settings ---
+  diagnostics_level = "all"
+  diagnostic_settings = {
+    log_analytics_workspace_id = azurerm_log_analytics_workspace.example.id
+  }
+
   session_hosts = {
     "host-entra-1" = {
-      name           = "avd-entra-host"
-      size           = "Standard_D2s_v3"
-      admin_username = "localadmin"
+      name                = "avd-entra-host"
+      size                = "Standard_D2s_v3"
+      admin_username      = "localadmin"
+      diagnostics_enabled = true
       network_interface = {
         name                          = "nic-entra-host-1"
         subnet_id                     = azurerm_subnet.example.id

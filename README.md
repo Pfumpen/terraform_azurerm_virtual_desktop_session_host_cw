@@ -14,7 +14,7 @@ This Terraform module provisions and configures one or more Windows Virtual Mach
 -   Supports standard Azure VM features: specific VM sizes, OS disk configurations, and custom/Marketplace images.
 -   Integrates with Availability Zones for high availability.
 -   Supports System-Assigned and User-Assigned Managed Identities.
--   **Flexible Diagnostic Settings:** Configure diagnostics with simple presets (`basic`, `detailed`) or a fully `custom` configuration. Diagnostics can be enabled/disabled globally and also on a per-session-host basis.
+-   **Advanced, Self-Adapting Diagnostics:** A simple, intent-based interface (`diagnostics_level`) dynamically configures detailed Azure Monitor diagnostics by discovering available log and metric categories at runtime. This eliminates configuration errors and the need for manual updates.
 -   Applies standardized and custom tags to all created resources.
 -   Allows for optional RBAC role assignments on the session host VMs.
 
@@ -86,7 +86,7 @@ Alternatively, you can still specify a custom image by providing the full `sourc
 | `domain_join_config` | Configuration object for joining an AD or AADDS domain. See structure below. | `object` | `null` | yes, if `join_type` is AD-based |
 | `fslogix_config` | If provided, installs and configures FSLogix for profile management. If `null`, this step is skipped. | `object` | `null` | no |
 | `tags`                 | A map of tags to apply to all created resources.                                                                                       | `map(string)`  | `{}`    | no       |
-| `diagnostics_level`    | Defines the detail level for diagnostics. Can be `none`, `basic`, `detailed`, or `custom`. See "Diagnostic Settings" section. | `string`       | `"basic"` | no       |
+| `diagnostics_level`    | Defines the desired diagnostic intent. Can be `none`, `all`, `audit`, or `custom`. See the "Diagnostic Settings" section for details. | `string`       | `"none"`  | no       |
 | `diagnostic_settings`  | Configures the destination for diagnostics. Required if `diagnostics_level` is not `none`. See "Diagnostic Settings" section.      | `object`       | `{}`    | no       |
 | `diagnostics_custom_logs` | A list of log categories to enable when `diagnostics_level` is `custom`.                                                         | `list(string)` | `[]`    | no       |
 | `diagnostics_custom_metrics` | A list of metric categories to enable when `diagnostics_level` is `custom`. Use `["AllMetrics"]` for all.                       | `list(string)` | `[]`    | no       |
@@ -115,24 +115,26 @@ A map of objects, where each object has the following attributes:
     -   `sku` (string, required)
     -   `version` (string, required)
 -   `admin_username` (string, required): The administrator username. The password will be randomly generated.
--   `diagnostics_enabled` (bool, optional): Controls whether diagnostics are enabled for this specific session host. Defaults to `true`. If set to `false`, this host will be excluded, even if global diagnostics are enabled.
+-   `diagnostics_enabled` (bool, optional): Controls whether diagnostics are enabled for this specific session host. Defaults to `false`. This flag is only effective when `diagnostics_level` is not `none`.
 
 ### Diagnostic Settings
 
-This module provides control for diagnostics through a combination of variables.
+This module implements an advanced, self-adapting pattern for diagnostics, driven by user intent and runtime discovery of the Azure resource's capabilities.
 
-1.  **`diagnostics_level`**: This is the master switch and defines the verbosity.
-    -   `none`: Disables all diagnostic settings.
-    -   `basic`: (Default) Enables a minimal set of logs (`AuditLogs`) and all metrics.
-    -   `detailed`: Enables a comprehensive set of logs for troubleshooting.
-    -   `custom`: Enables only the specific log and metric categories defined in `diagnostics_custom_logs` and `diagnostics_custom_metrics`.
+1.  **`diagnostics_level`**: This is the primary driver, defining your intent.
+    -   `none`: (Default) Disables all diagnostic settings.
+    -   `all`: Enables all available log and metric categories. The module discovers all categories supported by the session host at runtime and enables them. For logs, it will preferentially use the `allLogs` category group if available; otherwise, it enables every individual log category.
+    -   `audit`: Enables all available "audit" logs. The module discovers all categories in the "audit" group and enables them.
+    -   `custom`: Enables only the specific log and metric categories defined in the `diagnostics_custom_logs` and `diagnostics_custom_metrics` variables.
 
-2.  **`diagnostic_settings`**: If `diagnostics_level` is not `none`, this object specifies the destination for the diagnostics. **Exactly one** of the following attributes must be provided:
-    -   `log_analytics_workspace_id` (string): The resource ID of a Log Analytics Workspace.
-    -   `eventhub_authorization_rule_id` (string): The resource ID of an Event Hubs authorization rule.
-    -   `storage_account_id` (string): The resource ID of a Storage Account.
+2.  **`diagnostic_settings`**: If `diagnostics_level` is not `none`, this object specifies the destination. **Exactly one** of the following attributes must be provided:
+    -   `log_analytics_workspace_id` (string)
+    -   `eventhub_authorization_rule_id` (string)
+    -   `storage_account_id` (string)
 
-3.  **`diagnostics_enabled` (Per-Host Control)**: Inside the `session_hosts` map, you can set `diagnostics_enabled = false` for any host you wish to exclude from logging. By default, it's `true`.
+3.  **`diagnostics_enabled` (Per-Host Control)**: Inside the `session_hosts` map, you must set `diagnostics_enabled = true` for each specific host you want to monitor. This provides granular control over which resources generate diagnostic data.
+
+4.  **`diagnostics_custom_logs` & `diagnostics_custom_metrics`**: These lists are used only when `diagnostics_level` is set to `custom`. `diagnostics_custom_metrics` defaults to `["AllMetrics"]`.
 
 ### `password_generation_config` variable structure
 

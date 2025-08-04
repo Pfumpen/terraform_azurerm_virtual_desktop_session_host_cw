@@ -58,19 +58,19 @@ module "avd_session_host" {
   admin_password_key_vault_id = azurerm_key_vault.example.id
 
   # --- Diagnostic Settings ---
-  # Send detailed diagnostics to the Log Analytics Workspace.
-  # The module defaults to "basic" if this is not set.
+  # Send all available diagnostics to the Log Analytics Workspace.
   # Set to "none" to disable.
-  diagnostics_level = "detailed"
+  diagnostics_level = "all"
   diagnostic_settings = {
     log_analytics_workspace_id = azurerm_log_analytics_workspace.example.id
   }
 
   session_hosts = {
     "host1" = {
-      name           = "avd-sh-host1"
-      size           = "Standard_D2s_v3"
-      admin_username = "localadmin"
+      name                = "avd-sh-host1"
+      size                = "Standard_D2s_v3"
+      admin_username      = "localadmin"
+      diagnostics_enabled = true # Explicitly enable diagnostics for this host
       network_interface = {
         name                          = "nic-host1"
         subnet_id                     = azurerm_subnet.example.id
@@ -82,11 +82,11 @@ module "avd_session_host" {
       }
       image_key = "win10-22H2-ms-m365"
     },
-    "host2-no-diag" = {
-      name                = "avd-sh-host2"
-      size                = "Standard_D2s_v3"
-      admin_username      = "localadmin"
-      diagnostics_enabled = false # Explicitly disable diagnostics for this host
+    "host2" = {
+      name           = "avd-sh-host2"
+      size           = "Standard_D2s_v3"
+      admin_username = "localadmin"
+      # diagnostics_enabled defaults to false, so this host will not have diagnostics
       network_interface = {
         name                          = "nic-host2"
         subnet_id                     = azurerm_subnet.example.id

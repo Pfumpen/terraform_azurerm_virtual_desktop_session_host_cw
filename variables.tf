@@ -22,7 +22,7 @@ variable "session_hosts" {
       version   = string
     }))
     admin_username      = string
-    diagnostics_enabled = optional(bool)
+    diagnostics_enabled = optional(bool, false)
   }))
   nullable = false
 
@@ -166,24 +166,23 @@ variable "tags" {
 }
 
 variable "diagnostics_level" {
-  description = "Defines the detail level for diagnostics. Possible values: 'none', 'basic', 'detailed', 'custom'. 'none' disables diagnostics."
+  description = "Defines the desired diagnostic intent. 'all' and 'audit' are dynamically mapped to available categories. Possible values: 'none', 'all', 'audit', 'custom'."
   type        = string
   default     = "none"
   validation {
-    condition     = contains(["none", "basic", "detailed", "custom"], var.diagnostics_level)
-    error_message = "Valid values for diagnostics_level are 'none', 'basic', 'detailed', or 'custom'."
+    condition     = contains(["none", "all", "audit", "custom"], var.diagnostics_level)
+    error_message = "Valid values for diagnostics_level are 'none', 'all', 'audit', or 'custom'."
   }
 }
 
 variable "diagnostic_settings" {
-  description = "Configuration for the diagnostic settings. Specifies the destination for logs and metrics."
+  description = "A map containing the destination IDs for diagnostic settings. When diagnostics are enabled, exactly one destination must be specified."
   type = object({
     log_analytics_workspace_id     = optional(string)
     eventhub_authorization_rule_id = optional(string)
     storage_account_id             = optional(string)
   })
-  default  = {}
-  nullable = true
+  default = {}
 
   validation {
     condition = var.diagnostics_level == "none" || (
@@ -191,7 +190,7 @@ variable "diagnostic_settings" {
       (try(var.diagnostic_settings.eventhub_authorization_rule_id, null) != null ? 1 : 0) +
       (try(var.diagnostic_settings.storage_account_id, null) != null ? 1 : 0) == 1
     )
-    error_message = "When diagnostics_level is not 'none', exactly one of 'log_analytics_workspace_id', 'eventhub_authorization_rule_id', or 'storage_account_id' must be specified."
+    error_message = "When 'diagnostics_level' is not 'none', exactly one of 'log_analytics_workspace_id', 'eventhub_authorization_rule_id', or 'storage_account_id' must be specified in the 'diagnostic_settings' object."
   }
 }
 
@@ -202,9 +201,9 @@ variable "diagnostics_custom_logs" {
 }
 
 variable "diagnostics_custom_metrics" {
-  description = "A list of metric categories to enable when diagnostics_level is 'custom'. Use ['AllMetrics'] for all."
+  description = "A list of specific metric categories to enable. Use ['AllMetrics'] for all."
   type        = list(string)
-  default     = []
+  default     = ["AllMetrics"]
 }
 
 variable "managed_identity" {
