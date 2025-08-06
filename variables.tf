@@ -213,7 +213,7 @@ variable "managed_identity" {
     user_assigned_resource_ids = optional(list(string), [])
   })
   default  = {}
-  nullable = false
+  nullable = true
 
   validation {
     condition     = !(var.join_type == "entra_join") || (var.managed_identity.system_assigned == true)
@@ -221,10 +221,8 @@ variable "managed_identity" {
   }
 
   validation {
-    condition = var.managed_identity.system_assigned || length(var.managed_identity.user_assigned_resource_ids) > 0 || (
-      !var.managed_identity.system_assigned && length(var.managed_identity.user_assigned_resource_ids) == 0
-    )
-    error_message = "When the 'managed_identity' object is configured, either 'system_assigned' must be 'true' or the 'user_assigned_resource_ids' list must contain at least one ID."
+    condition     = var.managed_identity == null || (var.managed_identity.system_assigned || length(var.managed_identity.user_assigned_resource_ids) > 0)
+    error_message = "When the 'managed_identity' object is configured, either 'system_assigned' must be 'true' or 'user_assigned_resource_ids' must contain at least one ID."
   }
 }
 
