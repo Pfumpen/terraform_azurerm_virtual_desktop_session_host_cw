@@ -118,9 +118,10 @@ module "avd_session_host" {
 
   # --- FSLogix Configuration ---
   fslogix_config = {
-    vhd_locations = ["\\\\${azurerm_storage_account.example.name}.file.core.windows.net\\${azurerm_storage_share.example.name}"]
-    size_in_mbs   = 20000 # 20 GB profiles
-    volume_type   = "VHDX"
+    vhd_locations         = ["\\\\${azurerm_storage_account.example.name}.file.core.windows.net\\${azurerm_storage_share.example.name}"]
+    size_in_mbs           = 20000 # 20 GB profiles
+    volume_type           = "VHDX"
+    redir_xml_source_folder = "\\\\${azurerm_storage_account.example.name}.file.core.windows.net\\${azurerm_storage_share.example.name}\\fslogix_config" # Optional: Path to redirections.xml
   }
 
   tags = {

@@ -106,14 +106,22 @@ powershell -ExecutionPolicy Unrestricted -Command "
     $vhdLocationsArray = '${join(",", var.fslogix_config.vhd_locations)}'.Split(',') | ForEach-Object { $_.Trim() } | Where-Object { -not [string]::IsNullOrWhiteSpace($_) }
 
     # BOOL to DWORD: Safely handles null values by comparing to the string 'true'
-    $deleteLocalProfileDword = if ('${try(var.fslogix_config.delete_local_profile_when_vhd_should_apply, "false")}' -eq 'true') { 1 } else { 0 }
-    $flipFlopNameDword = if ('${try(var.fslogix_config.flip_flop_profile_directory_name, "false")}' -eq 'true') { 1 } else { 0 }
+    $deleteLocalProfileDword = if ('${try(var.fslogix_config.delete_local_profile_when_vhd_should_apply, "true")}' -eq 'true') { 1 } else { 0 }
+    $flipFlopNameDword = if ('${try(var.fslogix_config.flip_flop_profile_directory_name, "true")}' -eq 'true') { 1 } else { 0 }
 
     # DWORD: Use try() to provide a default value if the variable is null
     $sizeInMbs = [int]'${try(var.fslogix_config.size_in_mbs, 30000)}'
+    $profileType = [int]'${try(var.fslogix_config.profile_type, 0)}'
+    $lockedRetryCount = [int]'${try(var.fslogix_config.locked_retry_count, 3)}'
+    $lockedRetryInterval = [int]'${try(var.fslogix_config.locked_retry_interval, 15)}'
+    $reattachRetryCount = [int]'${try(var.fslogix_config.reattach_retry_count, 3)}'
+    $reattachIntervalSeconds = [int]'${try(var.fslogix_config.reattach_interval_seconds, 15)}'
     
     # VolumeType to DWORD: Use try() for a default and correctly map VHD/VHDX to 1/2
     $volumeTypeDword = if ('${try(var.fslogix_config.volume_type, "VHDX")}' -eq 'VHDX') { 2 } else { 1 }
+
+    # REG_SZ: Handle optional string value
+    $redirXmlPath = '${try(var.fslogix_config.redir_xml_source_folder, "")}'
 
     # --- Set Registry Keys ---
     $regPath = 'HKLM:\SOFTWARE\FSLogix\Profiles'
@@ -127,6 +135,16 @@ powershell -ExecutionPolicy Unrestricted -Command "
     New-ItemProperty -Path $regPath -Name 'SizeInMBs' -Value $sizeInMbs -PropertyType DWord -Force
     New-ItemProperty -Path $regPath -Name 'DeleteLocalProfileWhenVHDShouldApply' -Value $deleteLocalProfileDword -PropertyType DWord -Force
     New-ItemProperty -Path $regPath -Name 'FlipFlopProfileDirectoryName' -Value $flipFlopNameDword -PropertyType DWord -Force
+    New-ItemProperty -Path $regPath -Name 'ProfileType' -Value $profileType -PropertyType DWord -Force
+    New-ItemProperty -Path $regPath -Name 'LockedRetryCount' -Value $lockedRetryCount -PropertyType DWord -Force
+    New-ItemProperty -Path $regPath -Name 'LockedRetryInterval' -Value $lockedRetryInterval -PropertyType DWord -Force
+    New-ItemProperty -Path $regPath -Name 'ReAttachRetryCount' -Value $reattachRetryCount -PropertyType DWord -Force
+    New-ItemProperty -Path $regPath -Name 'ReAttachIntervalSeconds' -Value $reattachIntervalSeconds -PropertyType DWord -Force
+
+    if (-not [string]::IsNullOrWhiteSpace($redirXmlPath)) {
+        Write-Host "Setting RedirXMLSourceFolder to $redirXmlPath"
+        New-ItemProperty -Path $regPath -Name 'RedirXMLSourceFolder' -Value $redirXmlPath -PropertyType String -Force
+    }
 
     Write-Host 'FSLogix configuration applied successfully.'
 

@@ -174,6 +174,12 @@ To enable FSLogix, provide the `fslogix_config` object. The module will then aut
 -   `size_in_mbs` (number, optional): The default maximum size of the profile disk in megabytes. Defaults to `30000` (30 GB).
 -   `delete_local_profile_when_vhd_should_apply` (bool, optional): If `true`, any existing local Windows profile for a user will be deleted when they first sign in with an FSLogix profile. Defaults to `true`.
 -   `flip_flop_profile_directory_name` (bool, optional): If `true`, uses a format for the profile folder that swaps the username and SID, which can help with certain file path length issues. Defaults to `true`.
+-   `profile_type` (number, optional): Specifies the FSLogix profile type. `0` for normal, `1` for read-only, `2` for read/write with attempt to merge changes. Defaults to `0`.
+-   `locked_retry_count` (number, optional): Number of times to retry accessing a locked VHD(X) file. Defaults to `3`.
+-   `locked_retry_interval` (number, optional): Seconds to wait between retries for a locked file. Defaults to `15`.
+-   `reattach_retry_count` (number, optional): Number of times to retry reattaching a VHD(X) file if it's disconnected. Defaults to `3`.
+-   `reattach_interval_seconds` (number, optional): Seconds to wait between reattachment attempts. Defaults to `15`.
+-   `redir_xml_source_folder` (string, optional): Specifies a UNC path to a folder containing `redirections.xml` for folder redirection rules. Example: `\\\\server\\share\\fslogix_config`.
 
 **Example Usage:**
 ```hcl

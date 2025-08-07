@@ -120,13 +120,19 @@ variable "domain_join_config" {
 }
 
 variable "fslogix_config" {
-  description = "If provided, installs and configures FSLogix for profile management. If left as null, this step is skipped."
+  description = "If provided, installs and configures FSLogix for profile management. See FSLogix documentation for details on each setting."
   type = object({
-    vhd_locations = list(string)
-    volume_type   = optional(string, "VHDX")
-    size_in_mbs   = optional(number, 30000)
+    vhd_locations                              = list(string)
+    volume_type                                = optional(string, "VHDX")
+    size_in_mbs                                = optional(number, 30000)
     delete_local_profile_when_vhd_should_apply = optional(bool, true)
     flip_flop_profile_directory_name           = optional(bool, true)
+    profile_type                               = optional(number, 0)
+    locked_retry_count                         = optional(number, 3)
+    locked_retry_interval                      = optional(number, 15)
+    reattach_retry_count                       = optional(number, 3)
+    reattach_interval_seconds                  = optional(number, 15)
+    redir_xml_source_folder                    = optional(string)
   })
   default  = null
   nullable = true
