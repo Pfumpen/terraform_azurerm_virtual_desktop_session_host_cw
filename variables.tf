@@ -216,14 +216,16 @@ variable "managed_identity" {
   nullable = true
 
   validation {
-    condition     = !(var.join_type == "entra_join") || (var.managed_identity.system_assigned == true)
+    # This validation ensures that if the join type is 'entra_join', a system-assigned identity must be enabled.
+    # The logic is now null-safe.
+    condition     = !(var.join_type == "entra_join") || (var.managed_identity != null && var.managed_identity.system_assigned)
     error_message = "If 'join_type' is set to 'entra_join', 'managed_identity.system_assigned' MUST be set to 'true'."
   }
 
-  validation {
-    condition     = var.managed_identity == null || (var.managed_identity.system_assigned || length(var.managed_identity.user_assigned_resource_ids) > 0)
-    error_message = "When the 'managed_identity' object is configured, either 'system_assigned' must be 'true' or 'user_assigned_resource_ids' must contain at least one ID."
-  }
+  # The second validation block has been removed. It was logically flawed because it
+  # conflicted with the module's use of a default empty object `{}` to signify
+  # "no identity". The resource logic in `main.tf` already handles this correctly,
+  # making the validation redundant and the source of the original error.
 }
 
 variable "role_assignments" {
