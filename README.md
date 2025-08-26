@@ -14,7 +14,8 @@ This Terraform module provisions and configures one or more Windows Virtual Mach
 -   Supports standard Azure VM features: specific VM sizes, OS disk configurations, and custom/Marketplace images.
 -   Integrates with Availability Zones for high availability.
 -   Supports System-Assigned and User-Assigned Managed Identities.
--   **Advanced, Self-Adapting Diagnostics:** A simple, intent-based interface (`diagnostics_level`) dynamically configures detailed Azure Monitor diagnostics by discovering available log and metric categories at runtime. This eliminates configuration errors and the need for manual updates.
+-   **Dual-Layer Dynamic Diagnostics:** Configure both platform-level and Guest OS monitoring with a single `diagnostics_level` variable.
+-   **Guest OS Monitoring via Azure Monitor Agent (AMA):** Implements the modern AMA for collecting detailed Performance Counters and Windows Event Logs, configured centrally via a Data Collection Rule (DCR).
 -   Applies standardized and custom tags to all created resources.
 -   Allows for optional RBAC role assignments on the session host VMs.
 
@@ -67,7 +68,11 @@ Alternatively, you can still specify a custom image by providing the full `sourc
 | `azurerm_virtual_machine_extension`   | `entra_id_join` | `for_each` (if join type is Entra) |
 | `azurerm_virtual_machine_extension`   | `fslogix_setup`    | `fslogix_config` is set (for_each)     |
 | `azurerm_virtual_machine_extension`   | `avd_agent` | `for_each` |
-| `azurerm_monitor_diagnostic_setting`  | `session_host` (for_each, optional) |
+| `azurerm_monitor_diagnostic_setting`  | `this` (for_each, optional) |
+| `azurerm_monitor_data_collection_rule` | `shared` (optional) |
+| `azurerm_monitor_data_collection_rule_association` | `shared_dca` (for_each, optional) |
+| `azurerm_monitor_data_collection_rule_association` | `custom_dca` (for_each, optional) |
+| `azurerm_virtual_machine_extension` | `ama_agent` | `for_each` (optional) |
 | `azurerm_role_assignment`             | `session_host` (for_each, optional) |
 | `data.azurerm_key_vault_secret`       | `domain_join_password` (optional) |
 
@@ -89,7 +94,9 @@ Alternatively, you can still specify a custom image by providing the full `sourc
 | `diagnostics_level`    | Defines the desired diagnostic intent. Can be `none`, `all`, `audit`, or `custom`. See the "Diagnostic Settings" section for details. | `string`       | `"none"`  | no       |
 | `diagnostic_settings`  | Configures the destination for diagnostics. Required if `diagnostics_level` is not `none`. See "Diagnostic Settings" section.      | `object`       | `{}`    | no       |
 | `diagnostics_custom_logs` | A list of log categories to enable when `diagnostics_level` is `custom`.                                                         | `list(string)` | `[]`    | no       |
-| `diagnostics_custom_metrics` | A list of metric categories to enable when `diagnostics_level` is `custom`. Use `["AllMetrics"]` for all.                       | `list(string)` | `[]`    | no       |
+| `diagnostics_custom_metrics` | A list of metric categories to enable when `diagnostics_level` is `custom`. Use `["AllMetrics"]` for all.                       | `list(string)` | `["AllMetrics"]`    | no       |
+| `diagnostics_custom_perf_counters` | A list of performance counters for the Azure Monitor Agent to collect when `diagnostics_level` is `custom`. | `list(string)` | `[]`    | no       |
+| `diagnostics_custom_event_logs` | A list of XPath queries for Windows Event Logs for the Azure Monitor Agent to collect when `diagnostics_level` is `custom`. | `list(string)` | `[]`    | no       |
 | `managed_identity`     | Configuration for the Managed Identity of the virtual machine.                                                                         | `object`       | `{}`    | no       |
 | `role_assignments`     | A map of role assignments to create on the session host virtual machines.                                                              | `map(object)`  | `{}`    | no       |
 
@@ -116,25 +123,35 @@ A map of objects, where each object has the following attributes:
     -   `version` (string, required)
 -   `admin_username` (string, required): The administrator username. The password will be randomly generated.
 -   `diagnostics_enabled` (bool, optional): Controls whether diagnostics are enabled for this specific session host. Defaults to `false`. This flag is only effective when `diagnostics_level` is not `none`.
+-   `data_collection_rule_id` (string, optional): The resource ID of a pre-existing, custom Data Collection Rule. If provided, this session host will be associated with your custom DCR instead of the shared, module-managed DCR. `diagnostics_enabled` must be `true`.
 
-### Diagnostic Settings
+### Monitoring and Diagnostics
 
-This module implements an advanced, self-adapting pattern for diagnostics, driven by user intent and runtime discovery of the Azure resource's capabilities.
+This module implements an advanced, dual-layer diagnostics system controlled by the `diagnostics_level` variable. This allows you to configure both high-level platform monitoring and detailed in-guest monitoring with a single, intent-based setting.
 
-1.  **`diagnostics_level`**: This is the primary driver, defining your intent.
-    -   `none`: (Default) Disables all diagnostic settings.
-    -   `all`: Enables all available log and metric categories. The module discovers all categories supported by the session host at runtime and enables them. For logs, it will preferentially use the `allLogs` category group if available; otherwise, it enables every individual log category.
-    -   `audit`: Enables all available "audit" logs. The module discovers all categories in the "audit" group and enables them.
-    -   `custom`: Enables only the specific log and metric categories defined in the `diagnostics_custom_logs` and `diagnostics_custom_metrics` variables.
+#### Layer 1: Platform Diagnostics (Diagnostic Settings)
 
-2.  **`diagnostic_settings`**: If `diagnostics_level` is not `none`, this object specifies the destination. **Exactly one** of the following attributes must be provided:
-    -   `log_analytics_workspace_id` (string)
-    -   `eventhub_authorization_rule_id` (string)
-    -   `storage_account_id` (string)
+This layer collects host-level metrics for the VM resource itself (e.g., CPU percentage from the hypervisor's perspective, network in/out). The module is self-adapting; it discovers the available metric categories at runtime to prevent configuration errors.
 
-3.  **`diagnostics_enabled` (Per-Host Control)**: Inside the `session_hosts` map, you must set `diagnostics_enabled = true` for each specific host you want to monitor. This provides granular control over which resources generate diagnostic data.
+#### Layer 2: Guest OS Diagnostics (Azure Monitor Agent)
 
-4.  **`diagnostics_custom_logs` & `diagnostics_custom_metrics`**: These lists are used only when `diagnostics_level` is set to `custom`. `diagnostics_custom_metrics` defaults to `["AllMetrics"]`.
+This layer provides deep insights from inside the Windows operating system. It uses the modern Azure Monitor Agent (AMA) and a central Data Collection Rule (DCR) to stream Performance Counters (e.g., available memory, disk queue length) and Windows Event Logs directly to Log Analytics.
+
+#### Configuration
+
+-   **`diagnostics_level`**: This is the primary driver for both layers.
+    -   `none`: (Default) Disables all diagnostic settings and agents.
+    -   `audit`: Enables a recommended baseline of platform metrics and Guest OS logs (critical errors, security events).
+    -   `all`: Enables all available platform metrics and a verbose set of Guest OS logs and performance counters.
+    -   `custom`: Enables granular control. You must populate the `diagnostics_custom_*` variables to specify exactly what to collect.
+
+-   **`diagnostic_settings`**: If `diagnostics_level` is not `none`, this object specifies the destination. Exactly one of the attributes must be provided (typically `log_analytics_workspace_id` for AMA).
+
+-   **`diagnostics_enabled` (Per-Host Control)**: Inside the `session_hosts` map, set `diagnostics_enabled = true` for each host you want to monitor. This provides granular control.
+
+#### Using a Custom Data Collection Rule (DCR)
+
+For advanced scenarios, you can bypass the module's shared DCR and associate a specific session host with your own custom DCR. To do this, provide the resource ID of your DCR in the `data_collection_rule_id` attribute for that host within the `session_hosts` map. The module will handle creating the association.
 
 ### `password_generation_config` variable structure
 

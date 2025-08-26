@@ -21,8 +21,9 @@ variable "session_hosts" {
       sku       = string
       version   = string
     }))
-    admin_username      = string
-    diagnostics_enabled = optional(bool, false)
+    admin_username           = string
+    diagnostics_enabled      = optional(bool, false)
+    data_collection_rule_id = optional(string)
   }))
   nullable = false
 
@@ -172,7 +173,7 @@ variable "tags" {
 }
 
 variable "diagnostics_level" {
-  description = "Defines the desired diagnostic intent. 'all' and 'audit' are dynamically mapped to available categories. Possible values: 'none', 'all', 'audit', 'custom'."
+  description = "Controls the diagnostics level for both platform (Diagnostic Settings) and Guest OS (Azure Monitor Agent). Can be 'all', 'audit', 'custom', or 'none'."
   type        = string
   default     = "none"
   validation {
@@ -182,14 +183,13 @@ variable "diagnostics_level" {
 }
 
 variable "diagnostic_settings" {
-  description = "A map containing the destination IDs for diagnostic settings. When diagnostics are enabled, exactly one destination must be specified."
+  description = "Configures the destination for diagnostics. Required if diagnostics_level is not 'none'. Exactly one destination ID must be provided."
   type = object({
     log_analytics_workspace_id     = optional(string)
     eventhub_authorization_rule_id = optional(string)
     storage_account_id             = optional(string)
   })
   default = {}
-
   validation {
     condition = var.diagnostics_level == "none" || (
       (try(var.diagnostic_settings.log_analytics_workspace_id, null) != null ? 1 : 0) +
@@ -212,6 +212,18 @@ variable "diagnostics_custom_metrics" {
   default     = ["AllMetrics"]
 }
 
+variable "diagnostics_custom_perf_counters" {
+  description = "A list of performance counters for the Azure Monitor Agent to collect when diagnostics_level is 'custom'. Example: [\"\\Processor(_Total)\\% Processor Time\"]"
+  type        = list(string)
+  default     = []
+}
+
+variable "diagnostics_custom_event_logs" {
+  description = "A list of XPath queries for Windows Event Logs for the Azure Monitor Agent to collect when diagnostics_level is 'custom'. Example: [\"Application!*[System[(Level=1 or Level=2)]]\"]"
+  type        = list(string)
+  default     = []
+}
+
 variable "managed_identity" {
   description = "Configuration for the Managed Identity of the virtual machine."
   type = object({
@@ -222,16 +234,9 @@ variable "managed_identity" {
   nullable = true
 
   validation {
-    # This validation ensures that if the join type is 'entra_join', a system-assigned identity must be enabled.
-    # The logic is now null-safe.
     condition     = !(var.join_type == "entra_join") || (var.managed_identity != null && var.managed_identity.system_assigned)
     error_message = "If 'join_type' is set to 'entra_join', 'managed_identity.system_assigned' MUST be set to 'true'."
   }
-
-  # The second validation block has been removed. It was logically flawed because it
-  # conflicted with the module's use of a default empty object `{}` to signify
-  # "no identity". The resource logic in `main.tf` already handles this correctly,
-  # making the validation redundant and the source of the original error.
 }
 
 variable "role_assignments" {
