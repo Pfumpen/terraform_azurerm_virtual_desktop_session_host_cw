@@ -1,15 +1,12 @@
 # extensions.tf
 
-# 1. Conditional data source to fetch the domain join password
 data "azurerm_key_vault_secret" "domain_join_password" {
-  # This resource is only created if an AD-based join is selected and configured.
   count = contains(["ad_join", "hybrid_entra_join", "aadds_join"], var.join_type) && var.domain_join_config != null ? 1 : 0
 
   name         = basename(var.domain_join_config.password_key_vault_secret_id)
   key_vault_id = trimsuffix(var.domain_join_config.password_key_vault_secret_id, "/secrets/${basename(var.domain_join_config.password_key_vault_secret_id)}")
 }
 
-# 2. Conditional resource for AD-based joins (JsonADDomainExtension)
 resource "azurerm_virtual_machine_extension" "domain_join" {
   for_each = contains(["ad_join", "hybrid_entra_join", "aadds_join"], var.join_type) && var.domain_join_config != null ? var.session_hosts : {}
 
@@ -34,9 +31,14 @@ resource "azurerm_virtual_machine_extension" "domain_join" {
     create = "30m"
     delete = "15m"
   }
+  lifecycle {
+    ignore_changes = [
+      tags,
+    ]
+  }
 }
 
-# 3. Conditional resource for Microsoft Entra ID Join (AADLoginForWindows)
+
 resource "azurerm_virtual_machine_extension" "entra_id_join" {
   for_each = var.join_type == "entra_join" ? var.session_hosts : {}
 
@@ -47,10 +49,15 @@ resource "azurerm_virtual_machine_extension" "entra_id_join" {
   type_handler_version       = "1.0"
   auto_upgrade_minor_version = true
   tags                       = local.merged_tags
+
+  lifecycle {
+    ignore_changes = [
+      tags,
+    ]
+  }
 }
 
 resource "azurerm_virtual_machine_extension" "fslogix_setup" {
-  # Will only be created if an FSLogix configuration is provided
   for_each = var.fslogix_config != null ? var.session_hosts : {}
 
   name                 = "${each.value.name}-fslogix-setup"
@@ -58,9 +65,7 @@ resource "azurerm_virtual_machine_extension" "fslogix_setup" {
   publisher            = "Microsoft.Compute"
   type                 = "CustomScriptExtension"
   type_handler_version = "1.10"
-  
   auto_upgrade_minor_version = true
-
   tags = local.merged_tags
 
   depends_on = [
@@ -162,10 +167,15 @@ EOF
     create = "1h"
     delete = "15m"
   }
+
+  lifecycle {
+    ignore_changes = [
+      tags,
+    ]
+  }
 }
 
 
-# 5. MODIFIED: AVD Agent resource with corrected dependencies
 resource "azurerm_virtual_machine_extension" "avd_agent" {
   for_each = var.session_hosts
 
@@ -177,8 +187,6 @@ resource "azurerm_virtual_machine_extension" "avd_agent" {
   auto_upgrade_minor_version = true
   tags                       = local.merged_tags
 
-  # This depends_on clause ensures the AVD agent is installed only AFTER the
-  # appropriate join process AND FSLogix setup have been completed.
   depends_on = [
     azurerm_virtual_machine_extension.domain_join,
     azurerm_virtual_machine_extension.entra_id_join,
@@ -202,4 +210,10 @@ resource "azurerm_virtual_machine_extension" "avd_agent" {
     }
   }
   PROTECTED_SETTINGS
+
+  lifecycle {
+    ignore_changes = [
+      tags,
+    ]
+  }
 }

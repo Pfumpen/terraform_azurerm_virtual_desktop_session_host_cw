@@ -2,7 +2,7 @@ locals {
   merged_tags = merge(
     var.tags,
     {
-      "provisioner"   = "Terraform"
+      "deployment"   = "terraform"
     }
   )
 }
@@ -65,5 +65,10 @@ for_each = var.managed_identity != null && (var.managed_identity.system_assigned
       
       identity_ids = var.managed_identity.user_assigned_resource_ids
     }
+  }
+  lifecycle {
+    ignore_changes = [
+      tags,
+    ]
   }
 }
