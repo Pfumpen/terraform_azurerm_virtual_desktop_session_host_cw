@@ -14,15 +14,15 @@ variable "session_hosts" {
       caching              = string
       storage_account_type = string
     })
-    image_key              = optional(string)
+    image_key = optional(string)
     source_image_reference = optional(object({
       publisher = string
       offer     = string
       sku       = string
       version   = string
     }))
-    admin_username           = string
-    diagnostics_enabled      = optional(bool, false)
+    admin_username          = string
+    diagnostics_enabled     = optional(bool, false)
     data_collection_rule_id = optional(string)
   }))
   nullable = false
@@ -135,16 +135,14 @@ variable "fslogix_config" {
     reattach_interval_seconds                  = optional(number, 15)
     redir_xml_source_folder                    = optional(string)
   })
-  default  = null
-  nullable = true
+  default = null
 
   validation {
-    condition     = var.fslogix_config == null || length(var.fslogix_config.vhd_locations) > 0
+    condition     = var.fslogix_config == null || length(try(var.fslogix_config.vhd_locations, [])) > 0
     error_message = "When 'fslogix_config' is provided, the 'vhd_locations' list must not be empty."
   }
-
   validation {
-    condition     = var.fslogix_config == null || contains(["VHD", "VHDX"], var.fslogix_config.volume_type)
+    condition     = var.fslogix_config == null || contains(["VHD", "VHDX"], try(var.fslogix_config.volume_type, ""))
     error_message = "The 'volume_type' attribute in 'fslogix_config' must be either 'VHD' or 'VHDX'."
   }
 }
@@ -162,8 +160,7 @@ variable "password_generation_config" {
     special          = optional(bool, true)
     override_special = optional(string, "!@#$%^&*()-_=+[]{}<>:?")
   })
-  default  = {}
-  nullable = false
+  default = {}
 }
 
 variable "tags" {
@@ -230,8 +227,7 @@ variable "managed_identity" {
     system_assigned            = optional(bool, false)
     user_assigned_resource_ids = optional(list(string), [])
   })
-  default  = {}
-  nullable = true
+  default = {}
 
   validation {
     condition     = !(var.join_type == "entra_join") || (var.managed_identity != null && var.managed_identity.system_assigned)

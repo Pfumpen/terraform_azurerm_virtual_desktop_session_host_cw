@@ -60,13 +60,13 @@ resource "azurerm_virtual_machine_extension" "entra_id_join" {
 resource "azurerm_virtual_machine_extension" "fslogix_setup" {
   for_each = var.fslogix_config != null ? var.session_hosts : {}
 
-  name                 = "${each.value.name}-fslogix-setup"
-  virtual_machine_id   = azurerm_windows_virtual_machine.session_host[each.key].id
-  publisher            = "Microsoft.Compute"
-  type                 = "CustomScriptExtension"
-  type_handler_version = "1.10"
+  name                       = "${each.value.name}-fslogix-setup"
+  virtual_machine_id         = azurerm_windows_virtual_machine.session_host[each.key].id
+  publisher                  = "Microsoft.Compute"
+  type                       = "CustomScriptExtension"
+  type_handler_version       = "1.10"
   auto_upgrade_minor_version = true
-  tags = local.merged_tags
+  tags                       = local.merged_tags
 
   depends_on = [
     azurerm_virtual_machine_extension.domain_join,

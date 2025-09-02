@@ -2,7 +2,7 @@ locals {
   merged_tags = merge(
     var.tags,
     {
-      "deployment"   = "terraform"
+      "deployment" = "terraform"
     }
   )
 }
@@ -56,13 +56,13 @@ resource "azurerm_windows_virtual_machine" "session_host" {
   }
 
   dynamic "identity" {
-for_each = var.managed_identity != null && (var.managed_identity.system_assigned || length(var.managed_identity.user_assigned_resource_ids) > 0) ? [1] : []
+    for_each = var.managed_identity != null && (var.managed_identity.system_assigned || length(var.managed_identity.user_assigned_resource_ids) > 0) ? [1] : []
 
     content {
       type = (var.managed_identity.system_assigned && length(var.managed_identity.user_assigned_resource_ids) > 0) ? "SystemAssigned, UserAssigned" : (
         var.managed_identity.system_assigned ? "SystemAssigned" : "UserAssigned"
       )
-      
+
       identity_ids = var.managed_identity.user_assigned_resource_ids
     }
   }

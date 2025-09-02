@@ -10,7 +10,6 @@ locals {
   # --- Logic for Guest OS Diagnostics (Azure Monitor Agent) ---
 
   # Determines if the shared DCR needs to be created.
-  # The DCR is created if diagnostics are enabled, and might be unused if all hosts use a custom DCR.
   create_shared_dcr = local.global_diagnostics_enabled
 
   # --- Presets for AMA Performance Counters ---
@@ -27,7 +26,7 @@ locals {
 
   # --- Logic to select the correct AMA configuration for the shared DCR ---
   selected_perf_counters = var.diagnostics_level == "custom" ? var.diagnostics_custom_perf_counters : lookup(local.perf_counters_presets, var.diagnostics_level, [])
-  selected_event_logs    = var.diagnostics_level == "custom" ? var.diagnostics_custom_event_logs    : lookup(local.event_log_presets, var.diagnostics_level, [])
+  selected_event_logs    = var.diagnostics_level == "custom" ? var.diagnostics_custom_event_logs : lookup(local.event_log_presets, var.diagnostics_level, [])
 }
 
 #--------------------------------------------------------------------------
@@ -41,11 +40,11 @@ data "azurerm_monitor_diagnostic_categories" "this" {
 resource "azurerm_monitor_diagnostic_setting" "this" {
   for_each = data.azurerm_monitor_diagnostic_categories.this
 
-  name                       = "${var.session_hosts[each.key].name}-diag-settings"
-  target_resource_id         = each.value.id
-  log_analytics_workspace_id = try(var.diagnostic_settings.log_analytics_workspace_id, null)
+  name                           = "${var.session_hosts[each.key].name}-diag-settings"
+  target_resource_id             = each.value.id
+  log_analytics_workspace_id     = try(var.diagnostic_settings.log_analytics_workspace_id, null)
   eventhub_authorization_rule_id = try(var.diagnostic_settings.eventhub_authorization_rule_id, null)
-  storage_account_id         = try(var.diagnostic_settings.storage_account_id, null)
+  storage_account_id             = try(var.diagnostic_settings.storage_account_id, null)
 
   dynamic "enabled_log" {
     for_each = toset(
@@ -92,10 +91,10 @@ resource "azurerm_monitor_data_collection_rule" "shared" {
 
   data_sources {
     performance_counter {
-      streams                     = ["Microsoft-Perf"]
+      streams                       = ["Microsoft-Perf"]
       sampling_frequency_in_seconds = 60
-      counter_specifiers          = local.selected_perf_counters
-      name                        = "perfCounters-source"
+      counter_specifiers            = local.selected_perf_counters
+      name                          = "perfCounters-source"
     }
     windows_event_log {
       streams        = ["Microsoft-WindowsEvent"]
@@ -127,7 +126,6 @@ resource "azurerm_monitor_data_collection_rule_association" "this" {
   name               = "${azurerm_windows_virtual_machine.session_host[each.key].name}-dcr-association"
   target_resource_id = azurerm_windows_virtual_machine.session_host[each.key].id
 
-  # Use the custom DCR if provided, otherwise fall back to the shared DCR.
   data_collection_rule_id = try(each.value.data_collection_rule_id, null) != null ? each.value.data_collection_rule_id : azurerm_monitor_data_collection_rule.shared[0].id
 
   description = try(each.value.data_collection_rule_id, null) != null ? "Associates this Session Host with a custom-provided DCR." : "Associates this Session Host with the shared AVD DCR."
